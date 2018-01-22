@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/17 20:25:39 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/01/18 03:06:20 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/01/20 13:54:34 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int		parse_ant(t_lem *l)
 {
-	if (l->f & 0xFFFFFFFE || !(ft_isnumber(l->s, ft_strlen(l->s))))
-		ft_error_info(INFO, "ants");
+// 	// if (l->f & 0xFFFFFFFE || !(ft_isnumber(l->s, ft_strlen(l->s))))
+// 	// 	ft_error_info(INFO, "ants");
 	l->ant = ft_atoi(l->s);
 	return(gne(l));
 }

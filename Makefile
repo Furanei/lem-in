@@ -6,7 +6,7 @@
 #    By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/09/30 18:29:49 by mbriffau          #+#    #+#              #
-#    Updated: 2018/01/18 02:35:23 by mbriffau         ###   ########.fr        #
+#    Updated: 2018/01/21 20:19:14 by mbriffau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ SRC = \
 		parse_command.c \
 		parse_room.c \
 		parse_pipe.c \
+		parse_error.c \
 		tools.c
 
 OBJ =		$(SRC:.c=.o)

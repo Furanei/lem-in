@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/13 18:20:57 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/01/18 03:54:24 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/01/22 04:46:30 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,43 +26,41 @@ int			room_count_word(const char *s, char c)
 	return (1);
 }
 
-void	parse_room(t_lem *l, int o)
+int		parse2_room(t_lem *l, int o)
 {
+	char **str;
+	int	i;
+	int b;
+
+	i = 0;
+	b = 0;
+	printf("-3b-\n");
+	str = ft_strsplit(l->s, ' ');
+	printf("-3c-\n");
+	i = ft_strlen(&str[0][0]);
+	printf("%d\n", i);
+	b = ft_strlen(&str[2][0]);
+	printf("%d %d\n", i, b);
+	if (!(ft_isnumber(str[1], ft_strlen(str[1])) || ft_isnumber(str[2], ft_strlen(str[2]))))
+	{
+		printf("-fec-\n");
+		ft_error_info(INFO, "room");
+	}
+	printf("-3t-\n");
+	printf("-5-\n");
 	if (o)
 	{
 		if (!ft_strcmp(&l->s[2], "start"))
 		{
-			//////////////////////
+			l->f += START;
 		}
 		else if (!ft_strcmp(&l->s[2], "start"))
 		{
-			//ewgewf
+			l->f += END;
 		}
+		gne(&*l);
+		return (parse2_room(&*l, 0));
 	}
 	printf("parse_%s\n", l->s);
-}
-
-// int		save_room(t_lem *l, char *name, int option)
-// {
-// 	save room et pram start or end
-// }
-
-void	search_room(t_lem *l)
-{
-	if (l->s[0] == 'L')
-		ft_error_info(INFO, "room name(L)");
-	else if ((room_count_word(l->s, ' ')))
-	{
-		printf("OKROOM\n");
-		parse_room(&*l , 0);
-	}
-	else if (search_sharp(l) == 2)
-	{
-		l->f += STARTEND;
-		parse_room(&*l, 1);
-	}
-	else if (search_sharp(l))
-		gne(&*l);
-	else
-		ft_error_info(INFO, "room");
+	return (gne(&*l));
 }

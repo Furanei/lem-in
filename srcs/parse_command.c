@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/13 16:38:12 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/01/18 03:08:23 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/01/22 04:37:14 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,16 @@
 // 		free(s);
 // 	}
 // }
+
+int		iscomment(t_lem *l)
+{
+	if (l->s[0] == '#' && l->s[1] != '#')
+	{
+		next_line(&*l);
+		return (1);
+	}
+	return (0);
+}
 
 int		search_sharp(t_lem *l)
 {

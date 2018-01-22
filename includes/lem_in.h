@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/10 17:47:45 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/01/18 03:08:15 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/01/22 04:18:09 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,37 +42,55 @@
 typedef struct 	s_lem
 {
 	char	*s;
+	char	*map;
+	char	*order;
+
 	int		f;
 	int		ant;
 	int		start;
 	int		end;
 	int		gnl_count;
 
+	int		nline;// number of line (n gnl call)
+	
+
+	int 	index;// index for parsing.
+	int 	n;// index for parsing.
+
 	char	*start_name;
 	char	*end_name;
 	void	*room_list;
-	char	*map;
 
 }				t_lem;
 
 //parse.c
-void	parse(void);
+void	parse(t_lem *l);
+void	check_error(t_lem *l);
 void	*saved_line(t_lem *l, char *s);
 
-//parse_ants.c
-int		parse_ant(t_lem *l);
+//parse_error.c
+int		next_line(t_lem *l);
+int		check_ant(t_lem *l);
+int		check_room(t_lem *l);
+int		check_pipe(t_lem *l);
+void	check_error(t_lem *l);
 
 //parse_command.c
 int		search_sharp(t_lem *l);
+int		iscomment(t_lem *l);
 void	is_command(char *s, t_lem *l);
 
 //tools.c
 t_lem	*init_struct(t_lem *l);
 int 	gne(t_lem *l);
 void	saved_map(t_lem *l);
+int		get_next_word(char *str, int c);
+int		next_line(t_lem *l);
 
 //parse_room.c
-void 	search_room(t_lem *l);
+int		room_count_word(const char *s, char c);
+int		parse2_room(t_lem *l, int o);
+int 	parse_room(t_lem *l);
 
 //void	parse_pipe.c
 void 	search_pipe(t_lem *l, char *s);

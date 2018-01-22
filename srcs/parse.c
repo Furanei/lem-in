@@ -6,34 +6,44 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/13 16:34:11 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/01/18 03:27:14 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/01/22 04:41:02 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
-
-/*saved line and free*/
-
-void	parse(void)
-{
-	t_lem		l;
-
-	init_struct(&l);
-	get_next_line(0, &l.s);
-
-	parse_ant(&l);//return gnl
 	
-	search_room(&l);
-	// while(get_next_line(0, &s) == 1)
-	// {
-	// 	if (parse_loop(&l, s))
-	// 		map_copy(l.map, s, ft_strlen(s));
-	// 	else
-	// 		ft_error("ERROR");
-	// 	ft_putstr(s);
-	// 	ft_putstr("\n");
-	// 	l.gnl_count++;
-	// }
-	ft_putstr("\n----ECHO----\n");
-	ft_putstr(l.map);
+t_lem	*init_struct(t_lem *l)
+{
+	l->f = 0;
+	l->ant = 0;
+	l->start = 0;
+	l->end = 0;
+	l->nline = 0;
+	l->index = 0;
+	l->start_name = NULL;
+	l->end_name = NULL;
+	l->room_list = NULL;
+	return(l);
+}
+
+int 	parse_room(t_lem *l)
+{
+	if (l->s[0] == 'L')
+		ft_error_info(INFO, "room name(L)");
+	else if ((room_count_word(l->s, ' ')))
+	{
+		parse2_room(&*l , 0);
+	}
+	else if (search_sharp(l) == 2)
+	{
+		l->f += STARTEND;
+		parse2_room(&*l, 1);
+	}
+	else if (search_sharp(l))
+	{
+		gne(&*l);
+	} 
+	else
+		ft_error_info(INFO, "room");
+	return (gne(&*l));
 }
