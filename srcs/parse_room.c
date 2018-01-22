@@ -6,11 +6,31 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/13 18:20:57 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/01/22 04:46:30 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/01/22 23:23:49 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
+
+t_room	*ft_lstroomnew(void const *name, size_t size, size_t option)
+{
+	t_room		*newroom;
+	
+	if ((newroom = (t_room *)malloc(sizeof(t_room))) == NULL)
+		return (NULL);
+	if ((newroom->name = (void *)malloc(size)) == NULL)
+		return (NULL);
+
+	ft_memcpy(newroom->name, name, size);
+	printf("ewgwegewrgerge\n");
+	newroom->spe = option;
+	printf("ewgwegewrgerge\n");
+	newroom->next = NULL;
+	printf("EWWWWW\n");
+	newroom->child = NULL;
+	printf("ewgwegewrgerge\n");
+	return (newroom);
+}
 
 /*si le premier ou dernier char est = c, ou si le nombre de 
 str mots est different de 3 return 0 */
@@ -26,41 +46,47 @@ int			room_count_word(const char *s, char c)
 	return (1);
 }
 
-int		parse2_room(t_lem *l, int o)
+int		next_word(t_lem *l, int i)
 {
-	char **str;
-	int	i;
-	int b;
+	while (l->s[i] != '\0' && l->s[i] != ' ')
+		i = i + 1;
+	if ((l->s[i] == '\0') || ((l->s[i + 1] == '\0' || l->s[i + 1] == ' ')))
+		ft_error_info(INFO, l->s);
+	return (i + 1);
+}
 
-	i = 0;
-	b = 0;
-	printf("-3b-\n");
-	str = ft_strsplit(l->s, ' ');
-	printf("-3c-\n");
-	i = ft_strlen(&str[0][0]);
-	printf("%d\n", i);
-	b = ft_strlen(&str[2][0]);
-	printf("%d %d\n", i, b);
-	if (!(ft_isnumber(str[1], ft_strlen(str[1])) || ft_isnumber(str[2], ft_strlen(str[2]))))
+int		parse_room(t_lem *l, int option)
+{
+	int			i;
+	t_room		*tmp;
+
+	tmp = *l->room_list;
+	i = ft_strlen_c(l->s, ' ');
+	while (tmp)
 	{
-		printf("-fec-\n");
+		if (ft_strnequ(l->s, (tmp)->name, i))
+			ft_error_info(INFO, "room_doublon");
+		if (tmp->next == NULL)
+			tmp->next = ft_lstroomnew(l->s, ft_strlen_c(l->s, ' '), option);/////////////;
+		tmp = tmp->next;
+	}
+	i = next_word(&*l, i);
+	if (!ft_isdigit(l->s[i]))
 		ft_error_info(INFO, "room");
-	}
-	printf("-3t-\n");
-	printf("-5-\n");
-	if (o)
-	{
-		if (!ft_strcmp(&l->s[2], "start"))
-		{
-			l->f += START;
-		}
-		else if (!ft_strcmp(&l->s[2], "start"))
-		{
-			l->f += END;
-		}
-		gne(&*l);
-		return (parse2_room(&*l, 0));
-	}
-	printf("parse_%s\n", l->s);
-	return (gne(&*l));
+	i = next_word(&*l, i);
+	if (!ft_isdigit(l->s[i]))
+		ft_error_info(INFO, "room");
+	printf("ewgwegewrgerge\n");
+	// tmp = ft_lstroomnew(l->s, ft_strlen_c(l->s, ' '), option);/////////////
+	// while (*l->room_list)
+
+	printf("ENDENDEND\n");
+
+
+
+	// -dans le premier mot est deja dans la room_list > doublon
+	// 	- sinon aller au bou de la la room list et add
+	// - prendre l'element suivant puis regarder si c'est bien un int
+	// - prendre le 3eme element puis veriffier que c'est un int;
+	return (1);
 }

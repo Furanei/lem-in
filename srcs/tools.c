@@ -6,11 +6,25 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/13 17:54:23 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/01/21 20:40:40 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/01/22 22:19:26 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
+
+t_lem	*init_struct(t_lem *l)
+{
+	l->f = 0;
+	l->ant = 0;
+	l->start = 0;
+	l->end = 0;
+	l->nline = 0;
+	l->index = 0;
+	l->start_name = NULL;
+	l->end_name = NULL;
+	*l->room_list = NULL;
+	return(l);
+}
 
 int 	gne(t_lem *l)
 {

@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/10 17:47:45 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/01/22 04:18:09 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/01/22 22:41:10 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,16 @@
 // #define			(1 << 18)
 // #define			(1 << 19)
 
+typedef struct	s_room
+{
+	char 	*name;
+	int		file;
+
+	int		spe;
+	struct s_room	*next;
+	struct s_room	**child;
+}				t_room;
+
 typedef struct 	s_lem
 {
 	char	*s;
@@ -53,13 +63,12 @@ typedef struct 	s_lem
 
 	int		nline;// number of line (n gnl call)
 	
-
 	int 	index;// index for parsing.
 	int 	n;// index for parsing.
 
 	char	*start_name;
 	char	*end_name;
-	void	*room_list;
+	t_room	**room_list;
 
 }				t_lem;
 
@@ -88,9 +97,10 @@ int		get_next_word(char *str, int c);
 int		next_line(t_lem *l);
 
 //parse_room.c
+t_room	*ft_lstroomnew(void const *name, size_t size, size_t option);
 int		room_count_word(const char *s, char c);
-int		parse2_room(t_lem *l, int o);
-int 	parse_room(t_lem *l);
+int		parse_room(t_lem *l, int o);
+// int 	parse_room(t_lem *l);
 
 //void	parse_pipe.c
 void 	search_pipe(t_lem *l, char *s);

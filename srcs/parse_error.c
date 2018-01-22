@@ -35,16 +35,21 @@ int		check_ant(t_lem *l)// OK
 
 int		check_room(t_lem *l)
 {
+	int i;
+	i = 0;
 	next_line(&*l);
 	while (!ft_strchr(l->s, '-'))
 	{
 		iscomment(&*l);
 		if (l->s[0] == 'L')
-			ft_error_info(INFO, "room_error");
+			next_line(&*l);
 		else if (search_sharp(l) == 2)
-			printf("SHARP\n");
+		{
+			next_line(&*l);
+		}
 		else if (!room_count_word(l->s, ' '))
 			ft_error_info(INFO, "room_error_2");
+		parse_room(&*l, 0);
 		next_line(&*l);
 	}
 	return (1);
@@ -55,7 +60,6 @@ int		check_pipe(t_lem *l)
 	while (ft_strchr(l->s, '-'))
 	{
 		iscomment(&*l);
-		printf("cw :%d\n", ft_count_word(l->s, '-'));
 		if (ft_count_word(l->s, '-') != 2 || ft_strchr(l->s, ' '))
 			ft_error_info(INFO, "pipe_error");
 		next_line(&*l);
