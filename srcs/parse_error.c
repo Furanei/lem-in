@@ -43,12 +43,14 @@ int		check_room(t_lem *l)
 		iscomment(&*l);
 		if (l->s[0] == 'L')
 			next_line(&*l);
-		else if (search_sharp(l) == 2)
+		else if (search_sharp(l))
 		{
 			next_line(&*l);
 		}
 		else if (!room_count_word(l->s, ' '))
-			ft_error_info(INFO, "room_error_2");
+		{
+			ft_error_info(INFO, l->s);
+		}
 		parse_room(&*l, 0);
 		next_line(&*l);
 	}
@@ -71,6 +73,7 @@ void	check_error(t_lem *l)
 {	
 	check_ant(&*l) ? l->f += ANT : 0;
 	check_room(&*l);
+	ft_test_room_list(l->room_list);
 	check_pipe(&*l);
 	ft_error_info(INFO, "END_PARSING_ERROR !");
 }

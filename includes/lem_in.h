@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/10 17:47:45 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/01/22 22:41:10 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/01/23 13:23:49 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,6 @@ int		parse_room(t_lem *l, int o);
 void 	search_pipe(t_lem *l, char *s);
 void	parse_pipe(char *s, t_lem *l);
 
-
+void	ft_test_room_list(t_room **rlst);
 
 #endif

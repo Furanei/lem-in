@@ -6,11 +6,12 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/10 17:43:13 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/01/22 22:18:40 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/01/23 17:40:45 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
+
 
 void save_map(t_lem *l)
 {
@@ -28,7 +29,7 @@ int		main(void)
 
 	init_struct(&l);// inititialise la structure t_lem
 	save_map(&l);
-	printf("---save_map---\n%s\n---save_map---\n", l.map);
+	printf("---save_map---\n%s\n-----------\n\n", l.map);
 	check_error(&l);
 	parse(&l);
 	return(0);
@@ -41,3 +42,4 @@ void	parse(t_lem *l)
 	ft_putstr("\n----ECHO----\n");
 	ft_putstr(l->s);
 }
+
