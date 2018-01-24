@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/13 18:20:57 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/01/23 17:50:23 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/01/24 16:50:19 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,11 @@ int			room_count_word(const char *s, char c)
 	return (1);
 }
 
-int		next_word(t_lem *l, int i)
+int		next_word(t_lem *l, int i, char c)
 {
-	while (l->s[i] != '\0' && l->s[i] != ' ')
+	while (l->s[i] != '\0' && l->s[i] != c)
 		i = i + 1;
-	if ((l->s[i] == '\0') || ((l->s[i + 1] == '\0' || l->s[i + 1] == ' ')))
+	if ((l->s[i] == '\0') || ((l->s[i + 1] == '\0' || l->s[i + 1] == c)))
 		ft_error_info(INFO, l->s);
 	return (i + 1);
 }
@@ -70,6 +70,7 @@ int		parse_room(t_lem *l, int option)
 	int			i;
 	t_room		*tmp;
 
+	parse_comment(&*l);
 	tmp = *l->room_list;
 	i = ft_strlen_c(l->s, ' ');
 	if (tmp == NULL)
@@ -78,7 +79,7 @@ int		parse_room(t_lem *l, int option)
 	{
 		while (tmp)
 		{
-			if (ft_strncmp(l->s, (tmp)->name, i) == 0)/////!!!!!!!!!!!!!!!!!!!!!!!!!
+			if (ft_strncmp(l->s, (tmp)->name, i) == 0)//duplicate
 				ft_error_info(INFO, l->s);
 			if (tmp->next == NULL)
 			{
@@ -88,12 +89,12 @@ int		parse_room(t_lem *l, int option)
 			tmp = tmp->next;
 		}
 	}
-	i = next_word(&*l, i);
+	i = next_word(&*l, i, ' ');
 	if (!ft_isdigit(l->s[i]))
 		ft_error_info(INFO, "room");
-	i = next_word(&*l, i);
+	i = next_word(&*l, i, ' ');
 	if (!ft_isdigit(l->s[i]))
-		ft_error_info(INFO, "room");
+		ft_error_info(INFO, "letter_in_coordinate");
 	// tmp = ft_lstroomnew(l->s, ft_strlen_c(l->s, ' '), option);/////////////
 	// while (*l->room_list)
 	// -dans le premier mot est deja dans la room_list > doublon

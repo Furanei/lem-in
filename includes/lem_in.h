@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/10 17:47:45 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/01/23 13:23:49 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/01/24 16:01:33 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	check_error(t_lem *l);
 
 //parse_command.c
 int		search_sharp(t_lem *l);
-int		iscomment(t_lem *l);
+int		parse_comment(t_lem *l);
 void	is_command(char *s, t_lem *l);
 
 //tools.c
@@ -100,11 +100,11 @@ int		next_line(t_lem *l);
 t_room	*ft_lstroomnew(void const *name, size_t size, size_t option);
 int		room_count_word(const char *s, char c);
 int		parse_room(t_lem *l, int o);
+int		next_word(t_lem *l, int i, char c);
 // int 	parse_room(t_lem *l);
 
 //void	parse_pipe.c
-void 	search_pipe(t_lem *l, char *s);
-void	parse_pipe(char *s, t_lem *l);
+void	parse_pipe(t_lem *l);
 
 void	ft_test_room_list(t_room **rlst);
 

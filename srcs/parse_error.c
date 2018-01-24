@@ -25,7 +25,7 @@ int		next_line(t_lem *l)
 int		check_ant(t_lem *l)// OK
 {
 	next_line(&*l);
-	iscomment(&*l);
+	parse_comment(&*l);
 	if (l->f & 0xFFFFFFFE || !(ft_isnumber(l->s, ft_strlen(l->s))))
 		ft_error_info(INFO, "ant_error");
 	if (!(l->ant = ft_atoi(l->s)))
@@ -40,7 +40,9 @@ int		check_room(t_lem *l)
 	next_line(&*l);
 	while (!ft_strchr(l->s, '-'))
 	{
-		iscomment(&*l);
+		parse_comment(&*l);
+		if (ft_strchr(l->s, '-'))
+			break;
 		if (l->s[0] == 'L')
 			next_line(&*l);
 		else if (search_sharp(l))
@@ -61,9 +63,10 @@ int		check_pipe(t_lem *l)
 {
 	while (ft_strchr(l->s, '-'))
 	{
-		iscomment(&*l);
+		parse_comment(&*l);
 		if (ft_count_word(l->s, '-') != 2 || ft_strchr(l->s, ' '))
 			ft_error_info(INFO, "pipe_error");
+		parse_pipe(&*l);
 		next_line(&*l);
 	}
 	return (1);
