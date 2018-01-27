@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/13 17:54:23 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/01/24 15:59:19 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/01/27 02:23:04 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,18 @@ t_lem	*init_struct(t_lem *l)
 	l->start_name = NULL;
 	l->end_name = NULL;
 	*l->room_list = NULL;
+	l->nb_room = 0;
 	return(l);
+}
+
+int		next_line(t_lem *l)
+{
+	l->index += l->n;
+	l->index += (l->index ? 1 : 0);
+	l->n = ft_strlen_c(&l->map[l->index], '\n');
+	// printf("[%d-%d]%d]%s\n", l->n, l->index, (int)ft_strlen(&l->map[l->index]), &l->map[l->index]);
+	l->s = ft_strndup(&l->map[l->index], l->n);
+	return (1);
 }
 
 int 	gne(t_lem *l)
@@ -39,26 +50,4 @@ int 	gne(t_lem *l)
 		free(l->s);
 	}
 	return(get_next_line(0, &l->s));
-}
-
-int		get_next_word(char *str, int c)
-{
-	int i;
-
-	i = 0;
-	while (str[i] && str[i] != c)
-	{
-		if (str[i] == c)
-		{
-			while (str[i] == c)
-			{
-				if (str == 0)
-					return (0);
-				i++;
-			}
-			return (i);
-		}
-		i++;
-	}
-	return (0);
 }

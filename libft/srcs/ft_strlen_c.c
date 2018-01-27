@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/18 21:49:52 by mbriffau          #+#    #+#             */
-/*   Updated: 2017/09/30 14:14:44 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/01/26 22:53:29 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,5 @@ size_t	ft_strlen_c(char const *str, char cmp)
 			return (i);
 		i++;
 	}
-	return (0);
+	return (i);
 }

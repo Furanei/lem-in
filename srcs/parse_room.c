@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/13 18:20:57 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/01/24 16:50:19 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/01/27 02:22:28 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@ t_room	*ft_lstroomnew(void const *name, size_t size, size_t option)
 	ft_memcpy(newroom->name, name, size);
 	newroom->spe = option;
 	newroom->next = NULL;
-	newroom->child = NULL;
+	newroom->pipe = NULL;
+	newroom->npipe = 0;
+	newroom->file = 0;
 	return (newroom);
 }
 
@@ -50,21 +52,6 @@ int		next_word(t_lem *l, int i, char c)
 	return (i + 1);
 }
 
-void	ft_test_room_list(t_room **rlst)
-{
-	t_room *tmp;
-
-	tmp = *rlst;
-	printf("test start\n");
-	printf("(*rlst)->");
-	while (tmp)
-	{
-		printf("[%s]->", tmp->name);
-		tmp = tmp->next;
-	}
-	printf("NULL\n");
-}
-
 int		parse_room(t_lem *l, int option)
 {
 	int			i;
@@ -84,6 +71,7 @@ int		parse_room(t_lem *l, int option)
 			if (tmp->next == NULL)
 			{
 				tmp->next = ft_lstroomnew(l->s, ft_strlen_c(l->s, ' '), option);/////////////;
+				l->nb_room++;
 				break;
 			}
 			tmp = tmp->next;
@@ -95,11 +83,5 @@ int		parse_room(t_lem *l, int option)
 	i = next_word(&*l, i, ' ');
 	if (!ft_isdigit(l->s[i]))
 		ft_error_info(INFO, "letter_in_coordinate");
-	// tmp = ft_lstroomnew(l->s, ft_strlen_c(l->s, ' '), option);/////////////
-	// while (*l->room_list)
-	// -dans le premier mot est deja dans la room_list > doublon
-	// 	- sinon aller au bou de la la room list et add
-	// - prendre l'element suivant puis regarder si c'est bien un int
-	// - prendre le 3eme element puis veriffier que c'est un int;
 	return (1);
 }

@@ -13,15 +13,6 @@
 
 #include "../includes/lem_in.h"
 
-int		next_line(t_lem *l)
-{
-	l->index += l->n;
-	l->index += (l->index ? 1 : 0);
-	l->n = ft_strlen_c(&l->map[l->index], '\n');
-	l->s = ft_strndup(&l->map[l->index], l->n);
-	return (1);
-}
-
 int		check_ant(t_lem *l)// OK
 {
 	next_line(&*l);
@@ -61,22 +52,43 @@ int		check_room(t_lem *l)
 
 int		check_pipe(t_lem *l)
 {
+	// int i = 0;
 	while (ft_strchr(l->s, '-'))
 	{
+		// printf("%d)%s\n", i++, l->s);
 		parse_comment(&*l);
 		if (ft_count_word(l->s, '-') != 2 || ft_strchr(l->s, ' '))
 			ft_error_info(INFO, "pipe_error");
 		parse_pipe(&*l);
 		next_line(&*l);
+		// printf("OO%s\n", l->s)s;
+		printf("Xx\n%s\nxX\n", l->map);
 	}
 	return (1);
+}
+
+void	malloc_ptr_pipe(t_lem *l)
+{
+	t_room		*tmp;
+
+	tmp = *l->room_list;
+	while (tmp)
+	{
+		tmp->pipe = malloc(sizeof(void*) * l->nb_room);
+		ft_bzero(tmp->pipe, sizeof(void*));
+		tmp = tmp->next;
+	}
 }
 
 void	check_error(t_lem *l)
 {	
 	check_ant(&*l) ? l->f += ANT : 0;
 	check_room(&*l);
+	printf("%s\n", l->map);
 	ft_test_room_list(l->room_list);
+	malloc_ptr_pipe(&*l);
+	printf("%s\n", l->map);
 	check_pipe(&*l);
+	ft_test_room_pipe(l->room_list);
 	ft_error_info(INFO, "END_PARSING_ERROR !");
 }

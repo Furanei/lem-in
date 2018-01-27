@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/10 17:43:13 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/01/23 17:40:45 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/01/27 02:23:27 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,3 @@ void	parse(t_lem *l)
 	ft_putstr("\n----ECHO----\n");
 	ft_putstr(l->s);
 }
-
