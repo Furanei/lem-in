@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/13 18:20:57 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/01/27 02:22:28 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/01/30 02:19:42 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,12 @@
 t_room	*ft_lstroomnew(void const *name, size_t size, size_t option)
 {
 	t_room		*newroom;
-	
-	if ((newroom = (t_room *)malloc(sizeof(t_room))) == NULL)
-		return (NULL);
-	if ((newroom->name = (void *)malloc(size)) == NULL)
-		return (NULL);
+
+	if (((newroom = (t_room*)ft_memalloc(sizeof(t_room))) == NULL) 
+		|| ((newroom->name = (char*)ft_memalloc(size + 1)) == NULL))
+		ft_error_info(INFO, "malloc_error");
 	ft_memcpy(newroom->name, name, size);
 	newroom->spe = option;
-	newroom->next = NULL;
-	newroom->pipe = NULL;
-	newroom->npipe = 0;
-	newroom->file = 0;
 	return (newroom);
 }
 
@@ -45,43 +40,44 @@ int			room_count_word(const char *s, char c)
 
 int		next_word(t_lem *l, int i, char c)
 {
-	while (l->s[i] != '\0' && l->s[i] != c)
+	while (l->lmap[l->i][i] != '\0' && l->lmap[l->i][i] != c)
 		i = i + 1;
-	if ((l->s[i] == '\0') || ((l->s[i + 1] == '\0' || l->s[i + 1] == c)))
-		ft_error_info(INFO, l->s);
+	if ((l->lmap[l->i][i] == '\0') || ((l->lmap[l->i][i + 1] == '\0' || l->lmap[l->i][i + 1] == c)))
+		ft_error_info(INFO, l->lmap[l->i]);
 	return (i + 1);
 }
 
 int		parse_room(t_lem *l, int option)
 {
-	int			i;
+	int			size;
 	t_room		*tmp;
 
+	tmp = NULL;
 	parse_comment(&*l);
-	tmp = *l->room_list;
-	i = ft_strlen_c(l->s, ' ');
-	if (tmp == NULL)
-		*l->room_list = ft_lstroomnew(l->s, ft_strlen_c(l->s, ' '), option);
-	else
+	tmp = l->room_list;
+	size = ft_strlen_c(l->lmap[l->i], ' ');
+	if (tmp != NULL)
 	{
-		while (tmp)
+		while (tmp != NULL)
 		{
-			if (ft_strncmp(l->s, (tmp)->name, i) == 0)//duplicate
-				ft_error_info(INFO, l->s);
+			if (ft_strncmp(l->lmap[l->i], tmp->name, size) == 0)//duplicate
+				ft_error_info(INFO, l->lmap[l->i]);
 			if (tmp->next == NULL)
 			{
-				tmp->next = ft_lstroomnew(l->s, ft_strlen_c(l->s, ' '), option);/////////////;
+				tmp->next = ft_lstroomnew(l->lmap[l->i], ft_strlen_c(l->lmap[l->i], ' '), option);/////////////;
 				l->nb_room++;
 				break;
 			}
 			tmp = tmp->next;
 		}
 	}
-	i = next_word(&*l, i, ' ');
-	if (!ft_isdigit(l->s[i]))
+	else
+		l->room_list = ft_lstroomnew(l->lmap[l->i], size, option);
+	size = next_word(&*l, size, ' ');
+	if (!ft_isdigit(l->lmap[l->i][size]))
 		ft_error_info(INFO, "room");
-	i = next_word(&*l, i, ' ');
-	if (!ft_isdigit(l->s[i]))
+	size = next_word(&*l, size, ' ');
+	if (!ft_isdigit(l->lmap[l->i][size]))
 		ft_error_info(INFO, "letter_in_coordinate");
 	return (1);
 }

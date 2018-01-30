@@ -6,13 +6,14 @@
 #    By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/09/30 18:29:49 by mbriffau          #+#    #+#              #
-#    Updated: 2018/01/27 01:30:21 by mbriffau         ###   ########.fr        #
+#    Updated: 2018/01/30 02:21:41 by mbriffau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Compilation
 CC =		clang
-CFLAGS =	-Wall -Wextra -Werror
+# FLAGGGSSSS!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+CFLAGS =	-Wall -Wextra -Werror -g3
 ADDFLAGS = 
 
 # Default rule
@@ -28,8 +29,6 @@ INCDIR =	includes\
 # Sources
 SRC = \
 		main.c \
-		parse.c \
-		parse_ant.c \
 		parse_command.c \
 		parse_room.c \
 		parse_pipe.c \

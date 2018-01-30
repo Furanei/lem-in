@@ -6,39 +6,48 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/10 17:43:13 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/01/27 02:23:27 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/01/30 02:21:28 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
+void free_lem(t_lem	*l)
+{
+	free(l->map);
+}
 
 void save_map(t_lem *l)
 {
-	get_next_line(0, &l->s);
-	while(gne(&*l))
+	int i;
+
+	while (get_next_line(0, &l->s))
+	{
+		i = ft_strlen(l->s);
+		if (l->nline)
+		{
+			l->map = ft_strnjoinfree(l->map, "\n", i, 'L');
+			l->map = ft_strnjoinfree(l->map, l->s, i, 'B');
+		}
+		else
+		{
+			l->map = ft_strdup(l->s);
+			free(l->s);
+		}
 		l->nline++;
-	if (!(l->order = malloc(sizeof(char) * l->nline + 1)))
-		ft_error_info(INFO, "malloc");
-	ft_bzero(l->order, l->nline + 1);
+	}
+	free(l->map);
+	l->lmap = ft_strsplit(l->map, '\n');
 }
 
 int		main(void)
 {
 	t_lem		l;
 
-	init_struct(&l);// inititialise la structure t_lem
+	ft_bzero(&l, sizeof(t_lem));
+	l.room_list = NULL;
 	save_map(&l);
-	printf("---save_map---\n%s\n-----------\n\n", l.map);
 	check_error(&l);
-	parse(&l);
+	// free_lem(&l);
 	return(0);
-}
-
-void	parse(t_lem *l)
-{
-	check_error(&*l);
-
-	ft_putstr("\n----ECHO----\n");
-	ft_putstr(l->s);
 }

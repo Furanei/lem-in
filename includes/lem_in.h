@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/10 17:47:45 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/01/27 01:37:01 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/01/30 01:58:53 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@
 // #define			(1 << 17)
 // #define			(1 << 18)
 // #define			(1 << 19)
+#define S_SIZE		64
 
 typedef struct	s_room
 {
@@ -54,35 +55,34 @@ typedef struct 	s_lem
 {
 	char	*s;
 	char	*map;
-	char	*order;
+	char	**lmap;
 
 	int		nb_room;
 	int		f;
 	int		ant;
 	int		start;
 	int		end;
-	int		gnl_count;
+	int		i;
 
 	int		nline;// number of line (n gnl call)
 
 	int		index;// index for parsing.
-	int		n;// index for parsing.
+	int		size;// index for parsing.
 
 	char	*start_name;
 	char	*end_name;
-	t_room	**room_list;
+	t_room	*room_list;
 
 }				t_lem;
 
 //main.c
-void	parse(t_lem *l);
+void	free_lem(t_lem	*l);
 void	check_error(t_lem *l);
 void	*saved_line(t_lem *l, char *s);
 
 //parse_error.c
-int		check_ant(t_lem *l);
+void	check_ant(t_lem *l);
 int		check_room(t_lem *l);
-int		check_pipe(t_lem *l);
 void	check_error(t_lem *l);
 
 //parse_command.c
@@ -91,7 +91,6 @@ int		parse_comment(t_lem *l);
 void	is_command(char *s, t_lem *l);
 
 //tools.c
-t_lem	*init_struct(t_lem *l);
 int		next_line(t_lem *l);
 int 	gne(t_lem *l);
 void	saved_map(t_lem *l);
@@ -101,13 +100,13 @@ t_room	*ft_lstroomnew(void const *name, size_t size, size_t option);
 int		room_count_word(const char *s, char c);
 int		parse_room(t_lem *l, int o);
 int		next_word(t_lem *l, int i, char c);
-// int 	parse_room(t_lem *l);
 
 //void	parse_pipe.c
+int		check_pipe(t_lem *l);
 void	parse_pipe(t_lem *l);
 
 // lem_test.c
-void	ft_test_room_list(t_room **rlst);
-void	ft_test_room_pipe(t_room **rlst);
+void	ft_test_room_list(t_room *rlst);
+void	ft_test_room_pipe(t_room *rlst);
 
 #endif

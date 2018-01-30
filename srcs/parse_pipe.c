@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 16:49:08 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/01/27 02:24:32 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/01/30 02:20:00 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,29 @@ void	parse_pipe(t_lem *l)
 	t_room		*r2;
 	j = 0;
 	parse_comment(&*l);
-	i = ft_strlen_c(l->s, '-');
-	printf("%s[i=%d\n", l->s, i);
-	r1 = *l->room_list;
-	r2 = *l->room_list;
-	(r1 = get_room(&l->s[j], &*r1, i)) == NULL ? ft_error_info(INFO, "room1") : 0;
+	i = ft_strlen_c(l->lmap[l->i], '-');
+	// printf("%s[i=%d\n", l->lmap[l->i], i);
+	r1 = l->room_list;
+	r2 = l->room_list;
+	(r1 = get_room(&l->lmap[l->i][j], &*r1, i)) == NULL ? ft_error_info(INFO, "room1") : 0;
 	j =  next_word(&*l, i, '-');
-	(r2 = get_room(&l->s[j], &*r2, i)) == NULL ? ft_error_info(INFO, l->s) : 0;
+	(r2 = get_room(&l->lmap[l->i][j], &*r2, i)) == NULL ? ft_error_info(INFO, l->lmap[l->i]) : 0;
 	r1->pipe[r1->npipe] = r2;
 	r1->npipe++;
 	r2->pipe[r2->npipe] = r1;
 	r2->npipe++;
+}
+
+int		check_pipe(t_lem *l)
+{
+	// int i = 0;
+	while (l->lmap[l->i] != 0 && ft_strchr(l->lmap[l->i], '-'))
+	{	
+		parse_comment(&*l);
+		if (ft_count_word(l->lmap[l->i], '-') != 2 || ft_strchr(l->lmap[l->i], ' '))
+			ft_error_info(INFO, "pipe_error");
+		parse_pipe(&*l);
+		l->i++;
+	}
+	return (1);
 }
