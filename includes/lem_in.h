@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/10 17:47:45 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/01/30 01:58:53 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/01/30 05:50:36 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	check_error(t_lem *l);
 //parse_command.c
 int		search_sharp(t_lem *l);
 int		parse_comment(t_lem *l);
-void	is_command(char *s, t_lem *l);
+void	parse_order(t_lem *l);
 
 //tools.c
 int		next_line(t_lem *l);

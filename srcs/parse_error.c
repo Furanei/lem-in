@@ -32,16 +32,22 @@ int		check_room(t_lem *l)
 	l->i++;
 	while (1)
 	{
+		printf("%d-%s\n", l->i, l->lmap[l->i]);
 		parse_comment(&*l);
+		printf("%d-%s\n", l->i, l->lmap[l->i]);
 		if (ft_strchr(l->lmap[l->i], '-'))
 			break;
 		if (l->lmap[l->i][0] == 'L')
 			l->i++;
-		else if (search_sharp(l))//order
-			l->i++;
+		else if (search_sharp(l) == 2)
+		{
+			printf("SHAR\n");
+			parse_order(&*l);
+		}
 		else if (!room_count_word(l->lmap[l->i], ' '))
 			ft_error_info(INFO, l->lmap[l->i]);
-		parse_room(&*l, 0);
+		else
+			parse_room(&*l, 0);
 		l->i++;
 	}
 	return (1);
