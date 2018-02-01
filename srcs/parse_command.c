@@ -6,12 +6,12 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/13 16:38:12 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/01/30 06:16:23 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/02/01 03:08:43 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
-
+					
 int		parse_comment(t_lem *l)
 {
 	while ((l->lmap[l->i][0] == '#' && (l->lmap[l->i][1] != '#' ||
@@ -29,7 +29,6 @@ int		search_sharp(t_lem *l)
 		n++;
 	if (l->lmap[l->i][1] == '#')
 		n++;
-	printf("SHA%d = %s\n", n, l->lmap[l->i]);
 	return (n);
 }
 

@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/27 01:30:00 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/01/30 06:01:28 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/02/01 05:34:18 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	ft_test_room_pipe(t_room *rlst)///////
 		if (tmp->spe & START)
 			printf("(start)");
 		else if (tmp->spe & END)
-			printf("(END)");
+			printf("(end)");
 		tmp = tmp->next;
 		printf("\n |\n");
 	}

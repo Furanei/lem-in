@@ -1,28 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_error_info.c                                    :+:      :+:    :+:   */
+/*   print_ant.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/16 16:43:25 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/02/01 05:28:48 by mbriffau         ###   ########.fr       */
+/*   Created: 2018/02/01 05:11:55 by mbriffau          #+#    #+#             */
+/*   Updated: 2018/02/01 05:46:25 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/libft.h"
+#include "../includes/lem_in.h"
 
-void	ft_error_info(char *file, char *func, int line, char const *s)
+void	print_ant(t_lem *l)
 {
-	ft_putstr("\033[1;31mERROR\033[1;37m: ");
-	ft_putstr(file);
-	ft_putstr("\033[0m(file) \033[1;37m");
-	ft_putstr(func);
-	ft_putstr("()\033[0m(function)\033[1;37m L");
-	ft_putnbr(line);
-	ft_putstr("\033[0m(line)\033[1;37m");
-	ft_putstr("\033[0m: ");
-	ft_putstr(s);
-	ft_putstr("\n");
-	exit(-1);
+	int i;
+	t_room	*tmp;
+
+	i = 1;
+	tmp = l->room_list->thread;
+	while (i <= l->ant)
+	{
+		tmp = l->room_list->thread;
+		while (tmp)
+		{
+			printf("L%d-%s\n", i, tmp->name);	
+			tmp = tmp->thread;
+		}
+		i++;
+	}
 }

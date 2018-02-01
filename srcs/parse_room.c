@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/13 18:20:57 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/01/30 06:24:03 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/02/01 05:43:53 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,20 @@ int		parse_room(t_lem *l, int option)
 	parse_comment(&*l);
 	tmp = l->room_list;
 	size = ft_strlen_c(l->lmap[l->i], ' ');
+	if (l->f & STARTEND)
+	{
+		if (l->f & START)
+		{
+			option = START;
+			l->f -= START;
+		}
+		else if (l->f & END)
+		{
+			option = END;
+			l->f -= END;
+		}
+		l->f -= STARTEND;
+			}
 	if (tmp != NULL)
 	{
 		while (tmp != NULL)
@@ -65,20 +79,6 @@ int		parse_room(t_lem *l, int option)
 			if (tmp->next == NULL)
 			{
 				tmp->next = ft_lstroomnew(l->lmap[l->i], ft_strlen_c(l->lmap[l->i], ' '), option);/////////////;
-				if (l->f & STARTEND)
-				{
-					if (l->f & START)
-					{
-						tmp->next->spe = START;
-						l->f -= START;
-					}
-					else if (l->f & END)
-					{
-						tmp->next->spe = END;
-						l->f -= END;
-					}
-					l->f -= STARTEND;
-				}
 				l->nb_room++;
 				break;
 			}
@@ -88,21 +88,6 @@ int		parse_room(t_lem *l, int option)
 	else
 	{
 		l->room_list = ft_lstroomnew(l->lmap[l->i], size, option);
-		if (l->f & STARTEND)
-		{
-			if (l->f & START)
-			{
-				l->room_list->spe = START;
-				l->f -= START;
-			}
-			else if (l->f & END)
-			{
-				l->room_list->spe = END;
-				l->f -= END;
-			}
-			l->f -= STARTEND;
-		}
-
 	}
 	size = next_word(&*l, size, ' ');
 	if (!ft_isdigit(l->lmap[l->i][size]))

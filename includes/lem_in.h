@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/10 17:47:45 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/01/30 05:50:36 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/02/01 05:34:52 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@
 // #define			(1 << 18)
 // #define			(1 << 19)
 #define S_SIZE		64
+#define BUFF_S		2048
 
 typedef struct	s_room
 {
@@ -48,6 +49,7 @@ typedef struct	s_room
 	int				spe;
 	int 			npipe;
 	struct s_room	*next;
+	struct s_room	*thread;
 	struct s_room	**pipe;
 }				t_room;
 
@@ -72,7 +74,6 @@ typedef struct 	s_lem
 	char	*start_name;
 	char	*end_name;
 	t_room	*room_list;
-
 }				t_lem;
 
 //main.c
@@ -104,6 +105,12 @@ int		next_word(t_lem *l, int i, char c);
 //void	parse_pipe.c
 int		check_pipe(t_lem *l);
 void	parse_pipe(t_lem *l);
+
+//solve
+void	start_algo(t_lem *l);
+
+//print_ant.c
+void	print_ant(t_lem *l);
 
 // lem_test.c
 void	ft_test_room_list(t_room *rlst);

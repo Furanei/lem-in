@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 16:49:08 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/01/30 06:07:14 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/01/30 19:15:44 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void	parse_pipe(t_lem *l)
 	j = 0;
 	parse_comment(&*l);
 	i = ft_strlen_c(l->lmap[l->i], '-');
-	// printf("%s[i=%d\n", l->lmap[l->i], i);
 	r1 = l->room_list;
 	r2 = l->room_list;
 	(r1 = get_room(&l->lmap[l->i][j], &*r1, i)) == NULL ? ft_error_info(INFO, "room1") : 0;

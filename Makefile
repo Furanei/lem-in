@@ -6,14 +6,15 @@
 #    By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/09/30 18:29:49 by mbriffau          #+#    #+#              #
-#    Updated: 2018/01/30 02:21:41 by mbriffau         ###   ########.fr        #
+#    Updated: 2018/02/01 05:13:31 by mbriffau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Compilation
 CC =		clang
 # FLAGGGSSSS!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-CFLAGS =	-Wall -Wextra -Werror -g3
+CFLAGS =	-Wall -Wextra -Werror 
+#-fsanitize=address
 ADDFLAGS = 
 
 # Default rule
@@ -34,6 +35,8 @@ SRC = \
 		parse_pipe.c \
 		parse_error.c \
 		tools.c \
+		solve.c \
+		print_ant.c \
 		lem_test.c
 
 OBJ =		$(SRC:.c=.o)
