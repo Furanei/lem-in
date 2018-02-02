@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/10 17:47:45 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/02/01 05:34:52 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/02/02 05:06:22 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct	s_room
 {
 	char			*name;
 	int				file;
+	int				ant;
 
 	int				spe;
 	int 			npipe;

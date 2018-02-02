@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/13 17:54:23 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/01/30 05:48:56 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/02/02 05:11:53 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int		next_line(t_lem *l)
 		free(l->s);
 		l->index = l->index + 1;
 	}
-	// printf("= |%s|\n", &l->map[l->index]), fflush(0);
 	l->size = ft_strlen_c(&l->map[l->index], '\n');
 	l->s = ft_strndup(&l->map[l->index], l->size);
 	return (1);

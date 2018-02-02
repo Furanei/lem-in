@@ -18,9 +18,9 @@ void		check_ant(t_lem *l)// OK
 	parse_comment(&*l);
 	if (l->f & 0xFFFFFFFE || !(ft_isnumber(l->lmap[l->i],
 	ft_strlen(l->lmap[l->i]))))// todo int ?
-		ft_error_info(INFO, "ant_error");
+		ft_error("ERROR (ant_error)");
 	if (!(l->ant = ft_atoi(l->lmap[l->i])))
-		ft_error_info(INFO, "no_ant");
+		ft_error("ERROR (no_ant)");
 	l->f += ANT;
 }
 

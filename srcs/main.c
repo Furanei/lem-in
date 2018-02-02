@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/10 17:43:13 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/02/01 05:13:26 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/02/02 05:14:11 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	save_map(t_lem *l)
 	ft_bzero(buff, BUFF_S + 1);
 	while ((ret = read(0, buff, BUFF_S)))
 		l->map = ft_strnjoinfree(l->map, buff, ret, 'L');
+
 	l->lmap = ft_strsplit(l->map, '\n');
 }
 
@@ -38,7 +39,7 @@ int		main(void)
 	save_map(&l);
 	check_error(&l);
 	start_algo(&l);
+	printf("%s\n\n", l.map);
 	print_ant(&l);
-	printf("PARSING_OK!\n");
 	return(0);
 }

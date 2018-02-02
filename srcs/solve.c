@@ -6,18 +6,18 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 00:30:50 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/02/01 05:43:55 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/02/02 05:10:51 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
-void	mark_room(t_room *room, int i)
+void		mark_room(t_room *room, int i)
 {
 	room->file = i + 1;
 }
 
-void	soluce(t_room *room, t_room *order)
+void		soluce(t_room *room, t_room *order)
 {
 	int lo;
 	int nb;
@@ -28,7 +28,6 @@ void	soluce(t_room *room, t_room *order)
 	{
 		nb = 0;
 		order->thread = room;
-		printf("-%s %d\n", room->name, lo);
 		order = order->thread;
 		while (room->pipe[nb])
 		{
@@ -40,7 +39,7 @@ void	soluce(t_room *room, t_room *order)
 	order->thread = NULL;
 }
 
-t_room	*to_thread(t_room *file)
+t_room		*to_thread(t_room *file)
 {
 	t_room	*tmp;
 	int i;
@@ -50,12 +49,9 @@ t_room	*to_thread(t_room *file)
 	mark_room(file, 0);
 	while (file)
 	{
-		printf("file = %s(%d)\n", file->name, file->file);
 		i = 0;
 		if (file->spe & START)
-		{
 			return (file);
-		}
 		while (file->pipe[i])
 		{
 			if (!file->pipe[i]->file)
@@ -67,13 +63,12 @@ t_room	*to_thread(t_room *file)
 			i++;
 		}
 		file = file->thread;
-		
 	}
 	ft_error_info(INFO, "NO FOUND :(");
 	return (0);
 }
 
-void	algo(t_room *s, t_lem *l)
+void		algo(t_room *s, t_lem *l)
 {
 	t_room	*file;
 
@@ -81,7 +76,7 @@ void	algo(t_room *s, t_lem *l)
 	soluce(to_thread(&*file), &*l->room_list);
 }
 
-void	start_algo(t_lem *l)
+void		start_algo(t_lem *l)
 {
 	t_room *tmp;
 
@@ -98,24 +93,3 @@ void	start_algo(t_lem *l)
 		ft_error_info(INFO, "no_room_start");
 	algo(tmp, &*l);
 }
- // ParcoursLargeur(Graphe G, Sommet s):
- //       f = CreerFile();
- //       f.enfiler(s);
- //       marquer(s);
- //       tant que la file est non vide
- //                s = f.defiler();
- //                afficher(s);
- //                pour tout voisin t de s dans G
- //                         si t non marqué
- //                                 f.enfiler(t);
- //                                 marquer(t);
-
-
-// je suis lui donne la list de room
-
-// first room is marked by START in room->spe
-// last room is marked by END in room->spe
-
-
-// il me renvoi la solution
-
