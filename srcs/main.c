@@ -6,16 +6,11 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/10 17:43:13 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/02/02 05:14:11 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/02/03 06:51:07 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
-
-void free_lem(t_lem	*l)
-{
-	free(l->map);
-}
 
 void	save_map(t_lem *l)
 {
@@ -38,7 +33,7 @@ int		main(void)
 	l.room_list = NULL;
 	save_map(&l);
 	check_error(&l);
-	start_algo(&l);
+	algo(&l);
 	printf("%s\n\n", l.map);
 	print_ant(&l);
 	return(0);

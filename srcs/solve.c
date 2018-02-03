@@ -6,90 +6,75 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 00:30:50 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/02/02 05:10:51 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/02/03 08:58:58 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
-void		mark_room(t_room *room, int i)
+void		mark_room(t_room *room, int i)// marque la room du passage
 {
 	room->file = i + 1;
 }
 
-void		soluce(t_room *room, t_room *order)
+void		soluce(t_room *room, t_room *rlst)// enregistre la solution en suivant le decompte
 {
-	int lo;
+	int path_len;
 	int nb;
 
 	nb = 0;
-	lo = room->file;
-	while (lo--)
+	path_len = room->file;
+	while (path_len--)
 	{
 		nb = 0;
-		order->thread = room;
-		order = order->thread;
-		while (room->pipe[nb])
+		rlst->thread = room;
+		rlst = rlst->thread;
+		while (nb < room->npipe)
 		{
-			if (room->pipe[nb]->file == lo)
+			if (room->pipe[nb]->file == path_len)
 				room = room->pipe[nb];
 			nb++;
 		}
 	}
-	order->thread = NULL;
+	rlst->thread = NULL;
 }
 
-t_room		*to_thread(t_room *file)
+t_room		*to_thread(t_room *room)// place les niveaux etage et trouve la solution
 {
 	t_room	*tmp;
 	int i;
 
-	i = 0;
-	tmp = file;
-	mark_room(file, 0);
-	while (file)
+	tmp = room;
+	mark_room(room, 0);
+	while (room)
 	{
 		i = 0;
-		if (file->spe & START)
-			return (file);
-		while (file->pipe[i])
+		if (room->spe & START)
+			return (room);
+		while (i < room->npipe)
 		{
-			if (!file->pipe[i]->file)
+			if (room->pipe[i]->file == 0)
 			{
-				tmp->thread = file->pipe[i];
-				mark_room(file->pipe[i], file->file);
+				tmp->thread = room->pipe[i];
+				mark_room(room->pipe[i], room->file);
 				tmp = tmp->thread;
 			}
 			i++;
 		}
-		file = file->thread;
+		room = room->thread;
 	}
-	ft_error_info(INFO, "NO FOUND :(");
+	ft_error("ERROR (no path)");
 	return (0);
 }
 
-void		algo(t_room *s, t_lem *l)
-{
-	t_room	*file;
-
-	file = s;
-	soluce(to_thread(&*file), &*l->room_list);
-}
-
-void		start_algo(t_lem *l)
+void		algo(t_lem *l)
 {
 	t_room *tmp;
 
 	tmp = l->room_list;
-	while(tmp)
-	{
-		if (tmp->spe & END)
-		{
-			break;
-		}
+	while(tmp && !(tmp->spe & END))//recherche la room d'arrivee.
 		tmp = tmp->next;
-	}
 	if (!tmp)
-		ft_error_info(INFO, "no_room_start");
-	algo(tmp, &*l);
+		ft_error("ERROR (end)");
+	soluce(to_thread(tmp), &*l->room_list);
 }

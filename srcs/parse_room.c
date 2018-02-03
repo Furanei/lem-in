@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/13 18:20:57 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/02/02 05:06:01 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/02/03 09:02:29 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int		next_word(t_lem *l, int i, char c)
 	while (l->lmap[l->i][i] != '\0' && l->lmap[l->i][i] != c)
 		i = i + 1;
 	if ((l->lmap[l->i][i] == '\0') || ((l->lmap[l->i][i + 1] == '\0' || l->lmap[l->i][i + 1] == c)))
-		ft_error_info(INFO, l->lmap[l->i]);
+		ft_error("ERROR (room)");
 	return (i + 1);
 }
 
@@ -75,7 +75,7 @@ int		parse_room(t_lem *l, int option)
 		while (tmp != NULL)
 		{
 			if (ft_strncmp(l->lmap[l->i], tmp->name, size) == 0)//duplicate
-				ft_error_info(INFO, l->lmap[l->i]);
+				ft_error("ERROR (room)");
 			if (tmp->next == NULL)
 			{
 				tmp->next = ft_lstroomnew(l->lmap[l->i], ft_strlen_c(l->lmap[l->i], ' '), option);/////////////;
@@ -94,6 +94,6 @@ int		parse_room(t_lem *l, int option)
 		ft_error_info(INFO, "room");
 	size = next_word(&*l, size, ' ');
 	if (!ft_isdigit(l->lmap[l->i][size]))
-		ft_error_info(INFO, "letter_in_coordinate");
+		ft_error("ERROR (coor)");
 	return (1);
 }

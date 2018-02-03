@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/13 16:38:12 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/02/02 05:12:35 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/02/03 11:13:55 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,13 @@
 					
 int		parse_comment(t_lem *l)
 {
-	while ((l->lmap[l->i][0] == '#' && (l->lmap[l->i][1] != '#' ||
+	if (l->lmap[l->i] == 0)
+		ft_error("ERROR");
+	while (l->lmap[l->i] && (l->lmap[l->i][0] == '#' && (l->lmap[l->i][1] != '#' ||
 		l->lmap[l->i][2] == '#')))
 		l->i++;
+	if (l->lmap[l->i] == NULL)
+		return (0);
 	return (1);
 }
 

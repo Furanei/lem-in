@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/10 17:47:45 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/02/02 05:06:22 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/02/03 06:46:22 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ int		check_pipe(t_lem *l);
 void	parse_pipe(t_lem *l);
 
 //solve
-void	start_algo(t_lem *l);
+void	algo(t_lem *l);
 
 //print_ant.c
 void	print_ant(t_lem *l);
