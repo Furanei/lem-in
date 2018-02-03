@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/21 17:58:44 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/02/03 11:01:57 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/02/03 12:08:53 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,5 +95,4 @@ void	check_error(t_lem *l)
 	check_room(&*l);
 	malloc_ptr_pipe(&*l);
 	check_pipe(&*l);
-	ft_test_room_pipe(l->room_list);
 }

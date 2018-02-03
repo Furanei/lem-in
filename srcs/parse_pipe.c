@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 16:49:08 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/02/03 11:21:02 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/02/03 11:38:54 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,8 @@ void	parse_pipe(t_lem *l)
 
 int		check_pipe(t_lem *l)
 {
-	int i = 0;
 	while (l->lmap[l->i] != 0)
 	{	
-		printf("%d\n", i++);
 		if (parse_comment(&*l) == 0) 
 			break;
 		if (ft_count_word(l->lmap[l->i], '-') != 2 || ft_strchr(l->lmap[l->i], ' '))
@@ -77,6 +75,5 @@ int		check_pipe(t_lem *l)
 		parse_pipe(&*l);
 		l->i++;
 	}
-	printf("END\n");
 	return (1);
 }

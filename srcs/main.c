@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/10 17:43:13 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/02/03 06:51:07 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/02/03 12:06:18 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ int		main(void)
 	save_map(&l);
 	check_error(&l);
 	algo(&l);
-	printf("%s\n\n", l.map);
+	ft_printf("%s\n\n", l.map);
 	print_ant(&l);
+	printf("efwef\n");////////
 	return(0);
 }

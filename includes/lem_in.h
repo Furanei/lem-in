@@ -6,15 +6,14 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/10 17:47:45 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/02/03 06:46:22 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/02/03 11:37:32 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEM_IN_H
 # define LEM_IN_H
 
-#include "../libft/includes/libft.h"
-#include <stdio.h>
+#include "../libftpf/includes/ft_printf.h"
 
 # define INFO __FILE__, (char *)__FUNCTION__, __LINE__
 

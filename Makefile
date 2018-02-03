@@ -6,14 +6,14 @@
 #    By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/09/30 18:29:49 by mbriffau          #+#    #+#              #
-#    Updated: 2018/02/03 06:44:08 by mbriffau         ###   ########.fr        #
+#    Updated: 2018/02/03 12:20:14 by mbriffau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Compilation
 CC =		clang
 # FLAGGGSSSS!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-CFLAGS =	-Wall -Wextra -Werror
+CFLAGS =	-Wall -Wextra -Werror -fsanitize=address
 #-fsanitize=address
 ADDFLAGS = 
 
@@ -86,7 +86,7 @@ $(OBJDIR):
 	@mkdir -p $(OBJDIR)
 
 $(NAME): $(OBJP)
-	@$(CC) $(CFLAGS) $(ADDFLAGS) -o $@ $^ $(INCP) libft/libft.a
+	@$(CC) $(CFLAGS) $(ADDFLAGS) -o $@ $^ $(INCP) libftpf/libftprintf.a
 
 .PHONY: fclean clean re
 

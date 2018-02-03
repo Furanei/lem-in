@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/01 05:11:55 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/02/03 06:48:33 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/02/03 11:34:12 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	move_to_next_room(t_room *src, t_room *dst)
 	{
 		dst->ant = src->ant;
 		src->ant = 0;
-		printf("L%d-%s ", dst->ant, dst->name);
+		ft_printf("L%d-%s ", dst->ant, dst->name);
 	}
 }
 
@@ -65,6 +65,6 @@ void	print_ant(t_lem *l)
 			l->room_list->ant = i;
 		moving(l->room_list);
 		i++;
-		printf("\n");
+		ft_printf("\n");
 	}
 }
