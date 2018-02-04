@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/21 17:58:44 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/02/03 12:08:53 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/02/04 04:28:32 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ unsigned long long	atoi_lem(char const *str)
 {
 	unsigned long long	i;
 	unsigned long long	j;
-	int 				neg;
+	int					neg;
 
 	i = 0;
 	neg = 1;
@@ -52,7 +52,7 @@ void				check_ant(t_lem *l)
 	l->f += ANT;
 }
 
-int		check_room(t_lem *l)
+int					check_room(t_lem *l)
 {
 	int i;
 
@@ -61,8 +61,8 @@ int		check_room(t_lem *l)
 	while (l->lmap[l->i] != NULL)
 	{
 		parse_comment(&*l);
-		if (ft_strchr(l->lmap[l->i], '-'))/////////a voir si je garde
-			break;
+		if (ft_strchr(l->lmap[l->i], '-'))
+			break ;
 		if (l->lmap[l->i][0] == 'L')
 			ft_error("ERROR (room)");
 		else if (search_sharp(l) == 2)
@@ -76,7 +76,7 @@ int		check_room(t_lem *l)
 	return (1);
 }
 
-void	malloc_ptr_pipe(t_lem *l)
+void				malloc_ptr_pipe(t_lem *l)
 {
 	t_room		*tmp;
 
@@ -89,8 +89,8 @@ void	malloc_ptr_pipe(t_lem *l)
 	}
 }
 
-void	check_error(t_lem *l)
-{	
+void				check_error(t_lem *l)
+{
 	check_ant(&*l);
 	check_room(&*l);
 	malloc_ptr_pipe(&*l);

@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/01 05:11:55 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/02/03 11:34:12 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/02/04 07:31:28 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	moving(t_room *room)
 	if (room->thread == NULL)
 	{
 		room->ant = 0;
-		return;
+		return ;
 	}
 	moving(room->thread);
 	if (room->thread->ant == 0)
@@ -36,12 +36,12 @@ void	moving(t_room *room)
 
 int		path_len(t_room *r)
 {
-	t_room *tmp;
-	int i;
+	t_room	*tmp;
+	int		i;
 
 	tmp = r;
 	i = 0;
-	while(tmp)
+	while (tmp)
 	{
 		i++;
 		tmp = tmp->thread;
@@ -51,16 +51,15 @@ int		path_len(t_room *r)
 
 void	print_ant(t_lem *l)
 {
-	int i;
-	int len;
-	int new_ant;
+	int		i;
+	int		len;
+	int		new_ant;
 
 	new_ant = 1;
 	i = 1;
 	len = path_len(l->room_list);
-	while (i-len <= (l->ant - 2))
-	{	
-
+	while (i - len <= (l->ant - 2))
+	{
 		if (i <= l->ant)
 			l->room_list->ant = i;
 		moving(l->room_list);

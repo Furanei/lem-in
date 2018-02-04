@@ -6,93 +6,60 @@
 #    By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/09/30 18:29:49 by mbriffau          #+#    #+#              #
-#    Updated: 2018/02/03 12:20:14 by mbriffau         ###   ########.fr        #
+#    Updated: 2018/02/04 03:09:38 by mbriffau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+NAME = lem-in
+
 # Compilation
-CC =		clang
-# FLAGGGSSSS!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-CFLAGS =	-Wall -Wextra -Werror -fsanitize=address
-#-fsanitize=address
-ADDFLAGS = 
+CC = clang
 
-# Default rule
-DEFRULE =	all
-
-NAME =		lem-in
+# FLAGGGS
+FLAGS =	-Wall -Wextra -Werror
 
 # Directories	
-SRCDIR =	srcs
-OBJDIR =	objs
-INCDIR =	includes\
+SRCS_PATH = srcs/
+OBJ_PATH  = obj/
+LIBFT_PATH = libftpf/
 
 # Sources
-SRC = \
+SRCS_NAME = \
 		main.c \
 		parse_command.c \
 		parse_room.c \
 		parse_pipe.c \
 		parse_error.c \
 		solve.c \
-		print_ant.c \
-		lem_test.c
-
-OBJ =		$(SRC:.c=.o)
-
-# Prefixes
-LIBFT =		-Llibft/ -lft
+		print_ant.c
 
 # Paths foreach
-LIBP =		$(addprefix -L, $(LIBNAME)/)
-OBJP =		$(addprefix $(OBJDIR)/, $(SRC:.c=.o))
-INCP =		$(foreach dir, $(INCDIR), -I$(dir))
+SRCS = $(addprefix $(SRCS_PATH), $(SRCS_NAME))
+OBJ = $(addprefix $(OBJ_PATH), $(SRCS_NAME:.c=.o))
 
-# **************************************************************************** #
-# SPECIAL CHARS
+all: $(NAME)
 
-LOG_CLEAR		= \033[2K
-LOG_UP			= \033[A
-LOG_NOCOLOR		= \033[0m
-LOG_BOLD		= \033[1m
-LOG_UNDERLINE	= \033[4m
-LOG_BLINKING	= \033[5m
-LOG_BLACK		= \033[1;30m
-LOG_RED			= \033[1;31m
-LOG_GREEN		= \033[1;32m
-LOG_YELLOW		= \033[1;33m
-LOG_BLUE		= \033[1;34m
-LOG_VIOLET		= \033[1;35m
-LOG_CYAN		= \033[1;36m
-LOG_WHITE		= \033[1;37m
-
-# **************************************************************************** #
-# RULES
-
-# Main rules
-default:
-	@make $(DEFRULE)
-
-all: $(OBJDIR) $(NAME)
-
-re: fclean all
+$(NAME): $(OBJ)
+	@make -C $(LIBFT_PATH)
+	@$(CC) $(FLAGS) $(OBJ) $(INC) -L $(LIBFT_PATH) libftpf/libftprintf.a -o $(NAME)
+	@echo "$(NAME)\033[1;0m\033[32m created.\033[0m"
 
 # Compilation rules
 
-$(OBJDIR)/%.o: $(SRCDIR)/%.c
-	@$(CC) $(CFLAGS) $(ADDFLAGS) -c -o $@ $^ $(INCP)
-
-$(OBJDIR):
-	@mkdir -p $(OBJDIR)
-
-$(NAME): $(OBJP)
-	@$(CC) $(CFLAGS) $(ADDFLAGS) -o $@ $^ $(INCP) libftpf/libftprintf.a
-
-.PHONY: fclean clean re
+$(OBJ_PATH)%.o: $(SRCS_PATH)%.c
+		@echo "$(notdir $<)\033[1m\033[32m compiled.\033[0m"
+		@mkdir -p `dirname $@`
+		@gcc -c $(FLAGS) $(INC) $< -o $@
 
 clean:
-	@rm -rf $(OBJDIR)
+		@make -C $(LIBFT_PATH) fclean
+		@/bin/rm -rf $(OBJ_PATH)
+		@echo "All files .o have been \033[1;31mdeleted\033[0m."
 
-fclean:
-	@rm -rf $(OBJDIR)
-	@rm -f $(NAME)
+fclean: clean
+		@/bin/rm -rf $(NAME)
+		@echo "$(NAME) has been \033[1;31mdeleted\033[0m."
+
+re: fclean all
+
+.PHONY: all, clean, fclean, re

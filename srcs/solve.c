@@ -6,18 +6,18 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 00:30:50 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/02/03 12:08:58 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/02/04 07:33:52 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
-void		mark_room(t_room *room, int i)// marque la room du passage
+void		mark_room(t_room *room, int i)
 {
 	room->file = i + 1;
 }
 
-void		soluce(t_room *room, t_room *rlst)// enregistre la solution en suivant le decompte
+void		soluce(t_room *room, t_room *rlst)
 {
 	int path_len;
 	int nb;
@@ -39,10 +39,14 @@ void		soluce(t_room *room, t_room *rlst)// enregistre la solution en suivant le 
 	rlst->thread = NULL;
 }
 
-t_room		*to_thread(t_room *room)// place les niveaux etage et trouve la solution
+/*
+**creer des niveaux pour les salles a la meme distance de END.
+*/
+
+t_room		*to_thread(t_room *room)
 {
 	t_room	*tmp;
-	int i;
+	int		i;
 
 	tmp = room;
 	mark_room(room, 0);
@@ -72,8 +76,12 @@ void		algo(t_lem *l)
 	t_room *tmp;
 
 	tmp = l->room_list;
-	while(tmp && !(tmp->spe & END))//recherche la room d'arrivee.
+	while (tmp && !(tmp->spe & END))
+	{
+		// ft_printf("%s\n", tmp->name);
+		ft_printf("%s %d\n", tmp->name, tmp->spe);
 		tmp = tmp->next;
+	}
 	if (!tmp)
 		ft_error("ERROR (end)");
 	soluce(to_thread(tmp), &*l->room_list);
