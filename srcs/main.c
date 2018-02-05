@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/10 17:43:13 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/02/04 04:17:38 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/02/05 02:05:40 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,14 @@ void	save_map(t_lem *l)
 	while ((ret = read(0, buff, BUFF_S)))
 		l->map = ft_strnjoinfree(l->map, buff, ret, 'L');
 	l->lmap = ft_strsplit(l->map, '\n');
+}
+
+void	check_error(t_lem *l)
+{
+	check_ant(&*l);
+	check_room(&*l);
+	malloc_ptr_pipe(&*l);
+	check_pipe(&*l);
 }
 
 int		main(void)

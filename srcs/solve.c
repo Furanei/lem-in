@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 00:30:50 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/02/04 07:33:52 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/02/05 02:02:01 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,7 @@ void		algo(t_lem *l)
 
 	tmp = l->room_list;
 	while (tmp && !(tmp->spe & END))
-	{
-		// ft_printf("%s\n", tmp->name);
-		ft_printf("%s %d\n", tmp->name, tmp->spe);
 		tmp = tmp->next;
-	}
 	if (!tmp)
 		ft_error("ERROR (end)");
 	soluce(to_thread(tmp), &*l->room_list);

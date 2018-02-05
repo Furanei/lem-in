@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/13 18:20:57 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/02/04 07:38:10 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/02/05 02:29:21 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,48 +51,26 @@ int		next_word(t_lem *l, int i, char c)
 	return (i + 1);
 }
 
-void	room_start_end(t_lem *l, int option)
+void	room_start_end(t_lem *l, int *option)
 {
 	if (l->f & STARTEND)
 	{
 		if (l->f & START)
 		{
-			option = START;
+			*option = START;
 			l->f -= START;
 		}
 		else if (l->f & END)
 		{
-			option = END;
+			*option = END;
 			l->f -= END;
 		}
 		l->f -= STARTEND;
 	}
 }
 
-int		parse_room(t_lem *l, int option)
+void	add_room(t_lem *l, t_room *tmp, int size, int option)
 {
-	int			size;
-	t_room		*tmp;
-
-	tmp = NULL;
-	parse_comment(&*l);
-	tmp = l->room_list;
-	size = ft_strlen_c(l->lmap[l->i], ' ');
-	// room_start_end(&*l, option);
-	if (l->f & STARTEND)
-	{
-		if (l->f & START)
-		{
-			option = START;
-			l->f -= START;
-		}
-		else if (l->f & END)
-		{
-			option = END;
-			l->f -= END;
-		}
-		l->f -= STARTEND;
-	}
 	if (tmp != NULL)
 	{
 		while (tmp != NULL)
@@ -110,14 +88,6 @@ int		parse_room(t_lem *l, int option)
 		}
 	}
 	else
-	{
 		l->room_list = ft_lstroomnew(l->lmap[l->i], size, option);
-	}
-	size = next_word(&*l, size, ' ');
-	if (!ft_isdigit(l->lmap[l->i][size]))
-		ft_error_info(INFO, "room");
-	size = next_word(&*l, size, ' ');
-	if (!ft_isdigit(l->lmap[l->i][size]))
-		ft_error("ERROR (coor)");
-	return (1);
 }
+	

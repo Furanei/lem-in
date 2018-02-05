@@ -1,13 +1,13 @@
 4
 #fege
-##start
 #start
-room1 5 46
-room2 56 5
-room3 9 9
-room4 8 8
+##start
+room1 9 9
+room2 4 8
 ##end
-room5 45 5
+room5 244 6
+room3 45 5
+room4 4 5
 room2-room1
 room2-room3
 room4-room3

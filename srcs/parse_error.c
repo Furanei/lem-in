@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/21 17:58:44 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/02/04 04:28:32 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/02/05 02:08:26 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,28 @@ void				check_ant(t_lem *l)
 	l->f += ANT;
 }
 
+int					parse_room(t_lem *l, int option)
+{
+	int			size;
+	t_room		*tmp;
+
+	tmp = NULL;
+	parse_comment(&*l);
+	tmp = l->room_list;
+	size = ft_strlen_c(l->lmap[l->i], ' ');
+	room_start_end(&*l, &option);
+	add_room(&*l, &*tmp, size, option);
+	size = next_word(&*l, size, ' ');
+	if (!ft_isnumber(&l->lmap[l->i][size],
+		ft_strlen_c(&l->lmap[l->i][size], ' ')))
+		ft_error_info(INFO, "room");
+	size = next_word(&*l, size, ' ');
+	if (!ft_isnumber(&l->lmap[l->i][size],
+		ft_strlen_c(&l->lmap[l->i][size], ' ')))
+		ft_error("ERROR (coor)");
+	return (1);
+}
+
 int					check_room(t_lem *l)
 {
 	int i;
@@ -87,12 +109,4 @@ void				malloc_ptr_pipe(t_lem *l)
 		ft_bzero(tmp->pipe, sizeof(void*));
 		tmp = tmp->next;
 	}
-}
-
-void				check_error(t_lem *l)
-{
-	check_ant(&*l);
-	check_room(&*l);
-	malloc_ptr_pipe(&*l);
-	check_pipe(&*l);
 }
