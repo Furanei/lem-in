@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/21 17:58:44 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/02/05 02:08:26 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/02/05 05:35:27 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,8 @@ void				malloc_ptr_pipe(t_lem *l)
 	tmp = l->room_list;
 	while (tmp != NULL)
 	{
-		tmp->pipe = malloc(sizeof(void*) * l->nb_room);
+		if (!(tmp->pipe = malloc(sizeof(void*) * l->nb_room)))
+			exit(1);
 		ft_bzero(tmp->pipe, sizeof(void*));
 		tmp = tmp->next;
 	}

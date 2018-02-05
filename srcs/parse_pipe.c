@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 16:49:08 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/02/04 07:30:43 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/02/05 02:49:37 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	parse_pipe(t_lem *l)
 
 int		check_pipe(t_lem *l)
 {
-	while (l->lmap[l->i] != 0)
+	while (l->lmap[l->i] != 0 && l->nb_room--)
 	{
 		if (parse_comment(&*l) == 0)
 			break ;

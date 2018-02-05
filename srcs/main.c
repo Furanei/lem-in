@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/10 17:43:13 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/02/05 02:05:40 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/02/05 05:33:32 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,26 @@
 
 void	save_map(t_lem *l)
 {
-	int		ret;
-	char	buff[BUFF_S + 1];
+	int		len;
+	size_t	i;
+	char	*s;
 
-	l->map = ft_strndup("\0", 1);
-	ft_bzero(buff, BUFF_S + 1);
-	while ((ret = read(0, buff, BUFF_S)))
-		l->map = ft_strnjoinfree(l->map, buff, ret, 'L');
+	i = 0;
+	if (!(l->map = ft_strndup("\0", 1)))
+		exit(1);
+	while (get_next_line(0, &s) > 0)
+	{
+		len = ft_strlen(s);
+		if (!i && !ft_isnumber(s, len))
+			ft_error("ERROR");
+		if (i++)
+		{
+			if (!(l->map = ft_strnjoinfree(l->map, "\n", 1, 'L')))
+				exit(1);
+		}
+		if (!(l->map = ft_strnjoinfree(l->map, s, len, 'B')))
+			exit(1);
+	}
 	l->lmap = ft_strsplit(l->map, '\n');
 }
 

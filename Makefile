@@ -6,7 +6,7 @@
 #    By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/09/30 18:29:49 by mbriffau          #+#    #+#              #
-#    Updated: 2018/02/04 08:00:37 by mbriffau         ###   ########.fr        #
+#    Updated: 2018/02/05 03:18:15 by mbriffau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ NAME = lem-in
 CC = clang
 
 # FLAGGGS
-FLAGS =	-Wall -Wextra -Werror
+FLAGS =	-Wall -Wextra -Werror 
 
 # Directories	
 SRCS_PATH = srcs/
