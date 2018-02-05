@@ -6,7 +6,7 @@
 #    By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/09/30 18:29:49 by mbriffau          #+#    #+#              #
-#    Updated: 2018/02/05 03:18:15 by mbriffau         ###   ########.fr        #
+#    Updated: 2018/02/05 06:32:53 by mbriffau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ FLAGS =	-Wall -Wextra -Werror
 # Directories	
 SRCS_PATH = srcs/
 OBJ_PATH  = obj/
-LIBFT_PATH = libftpf/
+LIBFT_PATH = libpf/
 
 # Sources
 SRCS_NAME = \
