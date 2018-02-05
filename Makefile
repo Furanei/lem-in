@@ -6,7 +6,7 @@
 #    By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/09/30 18:29:49 by mbriffau          #+#    #+#              #
-#    Updated: 2018/02/05 06:32:53 by mbriffau         ###   ########.fr        #
+#    Updated: 2018/02/05 06:43:05 by mbriffau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@make -C $(LIBFT_PATH)
-	@$(CC) $(FLAGS) $(OBJ) $(INC) -L $(LIBFT_PATH) libftpf/libftprintf.a -o $(NAME)
+	@$(CC) $(FLAGS) $(OBJ) $(INC) -L $(LIBFT_PATH) libpf/libftprintf.a -o $(NAME)
 	@echo "$(NAME)\033[1;0m\033[32m created.\033[0m"
 
 # Compilation rules
