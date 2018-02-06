@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/10 17:43:13 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/02/05 05:33:32 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/02/06 07:05:48 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ void	save_map(t_lem *l)
 	while (get_next_line(0, &s) > 0)
 	{
 		len = ft_strlen(s);
-		if (!i && !ft_isnumber(s, len))
-			ft_error("ERROR");
 		if (i++)
 		{
 			if (!(l->map = ft_strnjoinfree(l->map, "\n", 1, 'L')))

@@ -6,13 +6,13 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/10 17:47:45 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/02/05 06:42:27 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/02/06 07:08:20 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEM_IN_H
 # define LEM_IN_H
-# include "../libpf/includes/ft_printf.h"
+# include "../lib/includes/ft_printf.h"
 # define INFO		__FILE__, (char *)__FUNCTION__, __LINE__
 # define ANT		(1 << 0)
 # define START 		(1 << 1)

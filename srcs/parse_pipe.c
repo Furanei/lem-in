@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 16:49:08 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/02/05 07:09:03 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/02/06 06:58:19 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ void	parse_pipe(t_lem *l)
 	i = ft_strlen_c(l->lmap[l->i], '-');
 	r1 = l->room_list;
 	r2 = l->room_list;
+	if (!(r1->npipe < l->nb_room) || !(r1->npipe < l->nb_room))
+		ft_error("ERROR (too much pipe)");
 	r1 = get_room(&l->lmap[l->i][j], &*r1);
 	j = next_word(&*l, i, '-');
 	r2 = get_room(&l->lmap[l->i][j], &*r2);
@@ -65,7 +67,7 @@ void	parse_pipe(t_lem *l)
 
 int		check_pipe(t_lem *l)
 {
-	while (l->lmap[l->i] != 0 && --l->nb_room)
+	while (l->lmap[l->i] != 0)
 	{
 		if (parse_comment(&*l) == 0)
 			break ;
