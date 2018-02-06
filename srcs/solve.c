@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 00:30:50 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/02/05 03:26:41 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/02/06 03:51:00 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,22 @@ void		mark_room(t_room *room, int i)
 	room->file = i + 1;
 }
 
-void		soluce(t_room *room, t_room *rlst)
+t_room		*soluce(t_room *room, t_room *rlst)
 {
-	int path_len;
-	int nb;
+	int		path_len;
+	int		nb;
+	int		i;
+	t_room	*tmp;
 
-	nb = 0;
+	i = 0;
+	tmp = rlst;
+	rlst = room;
 	path_len = room->file;
 	while (path_len--)
 	{
 		nb = 0;
-		rlst->thread = room;
-		rlst = rlst->thread;
+		tmp->thread = room;
+		tmp = tmp->thread;
 		while (nb < room->npipe)
 		{
 			if (room->pipe[nb]->file == path_len)
@@ -36,7 +40,8 @@ void		soluce(t_room *room, t_room *rlst)
 			nb++;
 		}
 	}
-	rlst->thread = NULL;
+	tmp->thread = NULL;
+	return (rlst);
 }
 
 /*
@@ -80,5 +85,5 @@ void		algo(t_lem *l)
 		tmp = tmp->next;
 	if (!tmp)
 		ft_error("ERROR (end)");
-	soluce(to_thread(tmp), &*l->room_list);
+	l->room_list = soluce(to_thread(tmp), &*l->room_list);
 }

@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/13 18:20:57 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/02/05 05:35:09 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/02/05 07:34:12 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,5 +88,8 @@ void	add_room(t_lem *l, t_room *tmp, int size, int option)
 		}
 	}
 	else
+	{
 		l->room_list = ft_lstroomnew(l->lmap[l->i], size, option);
+		l->nb_room++;
+	}
 }
