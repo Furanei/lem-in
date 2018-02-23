@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 16:49:08 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/02/06 06:58:19 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/02/23 23:32:31 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ t_room	*get_room(char *s, t_room *r)
 	return (r);
 }
 
-void	parse_pipe(t_lem *l)
+void	parse_pipe(t_lem *l, char *s)
 {
 	int		j;
 	int		i;
@@ -51,33 +51,33 @@ void	parse_pipe(t_lem *l)
 	t_room	*r2;
 
 	j = 0;
-	i = ft_strlen_c(l->lmap[l->i], '-');
+	i = ft_strlen_c(s, '-');
 	r1 = l->room_list;
 	r2 = l->room_list;
 	if (!(r1->npipe < l->nb_room) || !(r1->npipe < l->nb_room))
 		ft_error("ERROR (too much pipe)");
-	r1 = get_room(&l->lmap[l->i][j], &*r1);
-	j = next_word(&*l, i, '-');
-	r2 = get_room(&l->lmap[l->i][j], &*r2);
+	r1 = get_room(&s[j], &*r1);
+	j = next_word(s, i, '-');
+	r2 = get_room(&s[j], &*r2);
 	r1->pipe[r1->npipe] = r2;
 	r1->npipe++;
 	r2->pipe[r2->npipe] = r1;
 	r2->npipe++;
 }
 
-int		check_pipe(t_lem *l)
-{
-	while (l->lmap[l->i] != 0)
-	{
-		if (parse_comment(&*l) == 0)
-			break ;
-		if (ft_count_word(l->lmap[l->i], '-') != 2
-			|| ft_strchr(l->lmap[l->i], ' '))
-		{
-			ft_error("ERROR");
-		}
-		parse_pipe(&*l);
-		l->i++;
-	}
-	return (1);
-}
+// int		check_pipe(t_lem *l)
+// {
+// 	while (l->lmap[l->i] != 0)
+// 	{
+// 		if (parse_comment(&*l) == 0)
+// 			break ;
+// 		if (ft_count_word(l->lmap[l->i], '-') != 2
+// 			|| ft_strchr(l->lmap[l->i], ' '))
+// 		{
+// 			ft_error("ERROR");
+// 		}
+// 		parse_pipe(&*l);
+// 		l->i++;
+// 	}
+// 	return (1);
+// }

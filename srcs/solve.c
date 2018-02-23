@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 00:30:50 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/02/17 20:08:01 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/02/19 17:27:31 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,7 @@ t_room		*soluce(t_room *room, t_room *rlst)
 		while (nb < room->npipe)
 		{
 			if (room->pipe[nb]->file == path_len)
-			{
 				room = room->pipe[nb];
-				printf("-> %s\n", room->name);
-			}
 			nb++;
 		}
 	}

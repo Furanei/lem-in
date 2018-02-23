@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/21 17:58:44 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/02/18 17:13:48 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/02/23 23:20:07 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,62 +41,59 @@ unsigned long long	atoi_lem(char const *str)
 	return (j);
 }
 
-void				check_ant(t_lem *l)
+void				check_ant(t_lem *l, char *s)
 {
-	parse_comment(&*l);
-	if (l->f & 0xFFFFFFFE || !(ft_isnumber(l->lmap[l->i],
-	ft_strlen(l->lmap[l->i]))))
+	if (l->f & 0xFFFFFFFE || !(ft_isnumber(s,
+	ft_strlen(s))))
 		ft_error("ERROR (ant_error)");
-	if ((l->ant = atoi_lem(l->lmap[l->i])) <= 0)
+	if ((l->ant = atoi_lem(s)) <= 0)
 		ft_error("ERROR (no_ant)");
 	l->f += ANT;
 }
 
-int					parse_room(t_lem *l, int option)
+int					parse_room(t_lem *l, char *s, int option)
 {
 	int			size;
 	t_room		*tmp;
 
 	tmp = NULL;
-	parse_comment(&*l);
+	// parse_comment(&*l);
 	tmp = l->room_list;
-	size = ft_strlen_c(l->lmap[l->i], ' ');
+	size = ft_strlen_c(s, ' ');
 	room_start_end(&*l, &option);
-	add_room(&*l, &*tmp, size, option);
-	size = next_word(&*l, size, ' ');
-	if (!ft_isnumber(&l->lmap[l->i][size],
-		ft_strlen_c(&l->lmap[l->i][size], ' ')))
+	add_room(&*l, s, &*tmp, size, option);
+	size = next_word(s, size, ' ');
+	if (!ft_isnumber(&s[size], ft_strlen_c(&s[size], ' ')))
 		ft_error_info(INFO, "room");
-	size = next_word(&*l, size, ' ');
-	if (!ft_isnumber(&l->lmap[l->i][size],
-		ft_strlen_c(&l->lmap[l->i][size], ' ')))
+	size = next_word(s, size, ' ');
+	if (!ft_isnumber(&s[size], ft_strlen_c(&s[size], ' ')))
 		ft_error("ERROR (coor)");
 	return (1);
 }
 
-int					check_room(t_lem *l)
-{
-	int i;
+// int					check_room(t_lem *l)
+// {
+// 	int i;
 
-	i = 0;
-	l->i++;
-	while (l->lmap[l->i] != NULL)
-	{
-		parse_comment(&*l);
-		if (ft_strchr(l->lmap[l->i], '-'))
-			break ;
-		if (l->lmap[l->i][0] == 'L')
-			ft_error("ERROR (room)");
-		else if (search_sharp(l) == 2)
-			parse_order(&*l);
-		else if (!room_count_word(l->lmap[l->i], ' '))
-			ft_error("ERROR (room)");
-		else
-			parse_room(&*l, 0);
-		l->i++;
-	}
-	return (1);
-}
+// 	i = 0;
+// 	l->i++;
+// 	while (l->lmap[l->i] != NULL)
+// 	{
+// 		parse_comment(&*l);
+// 		if (ft_strchr(l->lmap[l->i], '-'))
+// 			break ;
+// 		if (l->lmap[l->i][0] == 'L')
+// 			ft_error("ERROR (room)");
+// 		else if (search_sharp(l) == 2)
+// 			parse_order(&*l);
+// 		else if (!room_count_word(l->lmap[l->i], ' '))
+// 			ft_error("ERROR (room)");
+// 		else
+// 			parse_room(&*l, 0);
+// 		l->i++;
+// 	}
+// 	return (1);
+// }
 
 void				malloc_ptr_pipe(t_lem *l)
 {

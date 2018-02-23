@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/17 16:45:56 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/02/18 22:13:59 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/02/23 23:24:58 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,23 +43,22 @@ int		strchrrev(char *s, int size, char c)
 		size--;
 	return (size + 1);
 }
-//012345[6 			i = 2
-//1 23 3\0
+
 int		isvalid_room(char *s)
 {
 	int		i;
 	int		len;
 
-	if (s != 0)
+	if (s != 0 && s[0] != 'L')
 	{
-		len = ft_strlen(s);//is number sur le morceau avec i && len || aussi les tab
+		len = ft_strlen(s);
 		i = strchrrev(s, (len - 1), ' ');
 		if (ft_isnumber(&s[i], (len - i)))
 		{
 			if (s[i - 1] == ' ' && (i > 3) && (s[i - 2] != ' '))
 			{
 				len = i - 2;
-				i = strchrrev(s, len, ' ');////////////////////////////////////////////////////
+				i = strchrrev(s, len, ' ');////////////////////////////
 				if (ft_isnumber(&s[i], (len - i + 1)) && i > 1)
 				{
 					i -= 2;
@@ -74,7 +73,7 @@ int		isvalid_room(char *s)
 
 int		isvalid_pipe(char *s)
 {
-	if (ft_count_word(s, '-') == 2)
+	if (ft_count_word(s, '-') == 2)// et room trouve dans la liste
 		return (1);
 	return (0);
 }

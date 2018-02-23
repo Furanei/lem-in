@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/13 18:20:57 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/02/06 07:06:56 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/02/23 23:23:15 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,12 @@ int		room_count_word(const char *s, char c)
 	return (1);
 }
 
-int		next_word(t_lem *l, int i, char c)
+int		next_word(char *s, int i, char c)
 {
-	while (l->lmap[l->i][i] != '\0' && l->lmap[l->i][i] != c)
+	while (s[i] != '\0' && s[i] != c)
 		i = i + 1;
-	if ((l->lmap[l->i][i] == '\0') || ((l->lmap[l->i][i + 1] == '\0'
-		|| l->lmap[l->i][i + 1] == c)))
+	if ((s[i] == '\0') || ((s[i + 1] == '\0'
+		|| s[i + 1] == c)))
 		ft_error("ERROR (room)");
 	return (i + 1);
 }
@@ -69,18 +69,18 @@ void	room_start_end(t_lem *l, int *option)
 	}
 }
 
-void	add_room(t_lem *l, t_room *tmp, int size, int option)
+void	add_room(t_lem *l, char *s, t_room *tmp, int size, int option)
 {
 	if (tmp != NULL)
 	{
 		while (tmp != NULL)
 		{
-			if (ft_strncmp(l->lmap[l->i], tmp->name, size) == 0)
+			if (ft_strncmp(s, tmp->name, size) == 0)
 				ft_error("ERROR (room)");
 			if (tmp->next == NULL)
 			{
-				tmp->next = ft_lstroomnew(l->lmap[l->i],
-					ft_strlen_c(l->lmap[l->i], ' '), option);
+				tmp->next = ft_lstroomnew(s,
+					ft_strlen_c(s, ' '), option);
 				l->nb_room++;
 				break ;
 			}
@@ -89,7 +89,7 @@ void	add_room(t_lem *l, t_room *tmp, int size, int option)
 	}
 	else
 	{
-		l->room_list = ft_lstroomnew(l->lmap[l->i], size, option);
+		l->room_list = ft_lstroomnew(s, size, option);
 		l->nb_room++;
 	}
 }
