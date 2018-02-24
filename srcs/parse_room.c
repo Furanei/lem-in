@@ -6,13 +6,13 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/13 18:20:57 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/02/23 23:23:15 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/02/24 20:11:06 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
-t_room	*ft_lstroomnew(void const *name, size_t size, size_t option)
+t_room	*ft_lstroomnew(void const *name, size_t size, int *f)
 {
 	t_room		*newroom;
 
@@ -20,7 +20,16 @@ t_room	*ft_lstroomnew(void const *name, size_t size, size_t option)
 		|| ((newroom->name = (char*)ft_memalloc(size + 1)) == NULL))
 		ft_error_info(INFO, "malloc_error");
 	ft_memcpy(newroom->name, name, size);
-	newroom->spe = option;
+	if (*f & NEXTSTART)
+	{
+		newroom->spe = START;
+		*f -= NEXTSTART;
+	}
+	else if (*f & NEXTEND)
+	{
+		newroom->spe = END;
+		*f -= NEXTEND;
+	}
 	return (newroom);
 }
 
@@ -51,25 +60,21 @@ int		next_word(char *s, int i, char c)
 	return (i + 1);
 }
 
-void	room_start_end(t_lem *l, int *option)
-{
-	if (l->f & STARTEND)
-	{
-		if (l->f & START)
-		{
-			*option = START;
-			l->f -= START;
-		}
-		else if (l->f & END)
-		{
-			*option = END;
-			l->f -= END;
-		}
-		l->f -= STARTEND;
-	}
-}
+// void	room_start_end(t_lem *l, int *option)
+// {
+// 	if (l->f & NEXTSTART)
+// 	{
+// 		*option = START;
+// 		l->f -= NEXTSTART;
+// 	}
+// 	else if (l->f & NEXTEND)
+// 	{
+// 		*option = END;
+// 		l->f -= NEXTEND;
+// 	}
+// }
 
-void	add_room(t_lem *l, char *s, t_room *tmp, int size, int option)
+void	add_room(t_lem *l, char *s, t_room *tmp, int size)
 {
 	if (tmp != NULL)
 	{
@@ -80,7 +85,7 @@ void	add_room(t_lem *l, char *s, t_room *tmp, int size, int option)
 			if (tmp->next == NULL)
 			{
 				tmp->next = ft_lstroomnew(s,
-					ft_strlen_c(s, ' '), option);
+					ft_strlen_c(s, ' '), &l->f);
 				l->nb_room++;
 				break ;
 			}
@@ -89,7 +94,45 @@ void	add_room(t_lem *l, char *s, t_room *tmp, int size, int option)
 	}
 	else
 	{
-		l->room_list = ft_lstroomnew(s, size, option);
+		l->room_list = ft_lstroomnew(s, size, &l->f);
 		l->nb_room++;
 	}
 }
+
+int					parse_room(t_lem *l, char *s, int len)
+{
+	t_room		*tmp;
+
+	tmp = NULL;
+	tmp = l->room_list;
+	// size = ft_strlen_c(s, ' ');
+	// room_start_end(&*l, &option);
+	add_room(&*l, s, &*tmp, len);
+	// size = next_word(s, size, ' ');
+	// // if (!ft_isnumber(&s[size], ft_strlen_c(&s[size], ' ')))
+	// // 	ft_error_info(INFO, "room");
+	// size = next_word(s, size, ' ');
+	// if (!ft_isnumber(&s[size], ft_strlen_c(&s[size], ' ')))
+	// 	ft_error("ERROR (coor)");
+	return (1);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

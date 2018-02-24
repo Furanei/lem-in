@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/17 16:45:56 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/02/23 23:24:58 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/02/24 19:44:30 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,15 @@ int		isvalid_comment(char *s)
 int		isvalid_command(char *s)
 {
 	if (s != 0 && (ft_strlen(s) > 3))
+	{
 		if (s[0] == '#' && s[1] == '#')
-			if (ft_strequ(&s[2], "start") || ft_strequ(&s[2], "end"))
+		{
+			if (ft_strequ(&s[2], "start") /*&& pas de stasrt */)
 				return (1);
+			if (ft_strequ(&s[2], "end")/* && pas de end ou end attente */)
+				return (2);
+		}
+	}
 	return (0);
 }
 
@@ -63,7 +69,7 @@ int		isvalid_room(char *s)
 				{
 					i -= 2;
 					if (s[i] != ' ')
-						return (1);
+						return (i + 1);
 				}
 			}
 		}

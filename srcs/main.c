@@ -6,11 +6,13 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/10 17:43:13 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/02/23 23:25:00 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/02/24 22:10:07 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
+
+void	ft_test_room_pipe(t_room *rlst);
 
 void	get_data(t_lem *l)
 {
@@ -19,6 +21,7 @@ void	get_data(t_lem *l)
 	char	*s;
 	int		parse_data;
 	int pipe = 0;
+	int name_size;
 
 	parse_data = 1;
 	i = 0;
@@ -26,7 +29,7 @@ void	get_data(t_lem *l)
 		exit(1);
 	while (get_next_line(0, &s) > 0)
 	{
-		ft_printf("%ld- \t\t{bold}%s{eoc} ", i, s);
+		ft_printf("%ld) {bold}%s{eoc} ", i, s);
 		if (parse_data && *s == 0)// empty line = Break SAVED
 		{
 			ft_printf("{blue}END of SAVED{eoc}");
@@ -38,30 +41,34 @@ void	get_data(t_lem *l)
 				 if (!(l->f & 0xFFFFFFFF) && isvalid_ant_number(s) == 1)
 				{
 					check_ant(&*l, s);
-					ft_printf("{blue}ant number is OK!{eoc}");
+					ft_printf("{green}Ant OK ✓{eoc}");
 				}
-				else if (((l->f & 0x6) != 0x6) && isvalid_command(s))
-						ft_printf("{blue}Order found!{eoc}");
-				else if (isvalid_comment(s))
-					ft_printf("{blue}Comment here!{eoc}");
-				else if ((pipe == 0) && isvalid_room(s))//create spacial entry for ##s ##end
+				else if (((l->f & 0x6) != 0x6) && isvalid_command(s) && (!(l->f & 24)))
 				{
-					//saved room
-					parse_room(&*l, s, 0);/////////////
-					ft_printf("{blue}Room valid{eoc}");
+					parse_order(&*l, s);
+					ft_printf("{green}Order OK ✓{eoc}");
 				}
-				else if (isvalid_pipe(s))
+				else if (isvalid_comment(s))
+					ft_printf("{green}Comment OK ✓{eoc}");
+				else if ((pipe == 0) && (name_size = isvalid_room(s)))
+				{//recup le return de isvalid room qui est egal a len du room name
+					parse_room(&*l, s, name_size);/////////////
+					ft_printf("{green}Room OK ✓{eoc}");
+				}
+				else if (isvalid_pipe(s) && (!(l->f & 24)))
 				{
 					if (pipe == 0)
 						malloc_ptr_pipe(&*l);
-					// pipe = 1;
+					pipe = 1;
 					// // if is =valid pipe, cant valid room
-					// //saved pipe
 					parse_pipe(&*l, s);///////////////////////
-					ft_printf("{blue}Pipe valid{eoc}");
+					ft_printf("{green}Pipe OK ✓{eoc}");
 				}
 				else
-					ft_printf("{red}invalid line{eoc}", s);
+				{
+					ft_printf("{red}KO{eoc}", s);
+					ft_error("ERROR");
+				}
 		}
 		len = ft_strlen(s);
 		if (i++)
@@ -92,8 +99,9 @@ int		main(void)
 	l.room_list = NULL;
 	get_data(&l);
 	// check_error(&l);
-	// algo(&l);
+	algo(&l);
 	// ft_printf("%s\n\n", l.map);
-	// print_ant(&l);
+	print_ant(&l);
+	ft_test_room_pipe(l.room_list);///////
 	return (0);
 }

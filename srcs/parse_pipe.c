@@ -6,11 +6,25 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 16:49:08 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/02/23 23:32:31 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/02/24 20:11:31 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
+
+void	malloc_ptr_pipe(t_lem *l)
+{
+	t_room		*tmp;
+
+	tmp = l->room_list;
+	while (tmp != NULL)
+	{
+		if (!(tmp->pipe = malloc(sizeof(void*) * l->nb_room)))
+			exit(1);
+		ft_bzero(tmp->pipe, sizeof(void*));
+		tmp = tmp->next;
+	}
+}
 
 int		strequ_room(char const *s1, char const *s2)
 {
@@ -39,7 +53,9 @@ t_room	*get_room(char *s, t_room *r)
 		r = r->next;
 	}
 	if (r == NULL)
-		ft_error("ERROR");
+	{
+		ft_error("ERRORget");
+	}
 	return (r);
 }
 
@@ -55,7 +71,10 @@ void	parse_pipe(t_lem *l, char *s)
 	r1 = l->room_list;
 	r2 = l->room_list;
 	if (!(r1->npipe < l->nb_room) || !(r1->npipe < l->nb_room))
+	{
+
 		ft_error("ERROR (too much pipe)");
+	}
 	r1 = get_room(&s[j], &*r1);
 	j = next_word(s, i, '-');
 	r2 = get_room(&s[j], &*r2);

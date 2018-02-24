@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/01 05:11:55 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/02/06 03:49:00 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/02/24 22:18:17 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,20 @@ void	move_to_next_room(t_room *src, t_room *dst)
 	{
 		dst->ant = src->ant;
 		src->ant = 0;
-		ft_printf("L%d-%s ", dst->ant, dst->name);
+		// ft_printf("L%d-%s ", src->ant, src->name);
 	}
 }
 
 void	moving(t_room *room)
 {
+	ft_printf("(%s)->", room->name);
 	if (room->thread == NULL)
 	{
 		room->ant = 0;
 		return ;
 	}
 	moving(room->thread);
-	if (room->thread->ant == 0)
+	if ((room->thread->ant == 0) && (room->ant > 0))
 		move_to_next_room(room, room->thread);
 }
 
@@ -53,15 +54,17 @@ void	print_ant(t_lem *l)
 {
 	int		i;
 	int		len;
-	int		new_ant;
 
-	new_ant = 1;
 	i = 1;
 	len = path_len(l->room_list);
-	while (i - len <= (l->ant - 2))
+	ft_printf("len is %d !\n", len);
+	while (i - len <= (l->ant - 2))// nb_room <= nb_ant -2
 	{
 		if (i <= l->ant)
+		{
 			l->room_list->ant = i;
+			// ft_printf("\nL%d dans %s\n", i, l->room_list->name);
+		}
 		moving(l->room_list);
 		i++;
 		ft_printf("\n");

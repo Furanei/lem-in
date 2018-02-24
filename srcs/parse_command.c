@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/13 16:38:12 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/02/19 21:58:58 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/02/24 18:56:06 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,10 @@ int		search_sharp(t_lem *l)
 	return (n);
 }
 
-void	parse_order(t_lem *l)
+void	parse_order(t_lem *l, char *s)
 {
-	if (ft_strequ(&l->lmap[l->i][2], "start") && !(l->f & START))
-		l->f += START + STARTEND;
-	else if (ft_strequ(&l->lmap[l->i][2], "end") && !(l->f & END))
-		l->f += END + STARTEND;
+	if (ft_strequ(&s[2], "start") && !(l->f & START))
+		l->f += START + NEXTSTART;
+	else if (ft_strequ(&s[2], "end") && !(l->f & END))
+		l->f += END + NEXTEND;
 }

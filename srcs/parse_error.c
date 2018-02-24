@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/21 17:58:44 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/02/23 23:20:07 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/02/24 22:09:49 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,26 +51,6 @@ void				check_ant(t_lem *l, char *s)
 	l->f += ANT;
 }
 
-int					parse_room(t_lem *l, char *s, int option)
-{
-	int			size;
-	t_room		*tmp;
-
-	tmp = NULL;
-	// parse_comment(&*l);
-	tmp = l->room_list;
-	size = ft_strlen_c(s, ' ');
-	room_start_end(&*l, &option);
-	add_room(&*l, s, &*tmp, size, option);
-	size = next_word(s, size, ' ');
-	if (!ft_isnumber(&s[size], ft_strlen_c(&s[size], ' ')))
-		ft_error_info(INFO, "room");
-	size = next_word(s, size, ' ');
-	if (!ft_isnumber(&s[size], ft_strlen_c(&s[size], ' ')))
-		ft_error("ERROR (coor)");
-	return (1);
-}
-
 // int					check_room(t_lem *l)
 // {
 // 	int i;
@@ -94,17 +74,3 @@ int					parse_room(t_lem *l, char *s, int option)
 // 	}
 // 	return (1);
 // }
-
-void				malloc_ptr_pipe(t_lem *l)
-{
-	t_room		*tmp;
-
-	tmp = l->room_list;
-	while (tmp != NULL)
-	{
-		if (!(tmp->pipe = malloc(sizeof(void*) * l->nb_room)))
-			exit(1);
-		ft_bzero(tmp->pipe, sizeof(void*));
-		tmp = tmp->next;
-	}
-}

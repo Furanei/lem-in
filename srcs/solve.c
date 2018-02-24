@@ -6,16 +6,11 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 00:30:50 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/02/19 17:27:31 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/02/24 22:32:42 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
-
-void		mark_room(t_room *room, int i)
-{
-	room->file = i + 1;
-}
 
 t_room		*soluce(t_room *room, t_room *rlst)
 {
@@ -28,6 +23,7 @@ t_room		*soluce(t_room *room, t_room *rlst)
 	tmp = rlst;
 	rlst = room;
 	path_len = room->file;
+	printf("&&&&&&&&&& %d\n", room->file);
 	while (path_len--)
 	{
 		nb = 0;
@@ -54,7 +50,7 @@ t_room		*to_thread(t_room *room)
 	int		i;
 
 	tmp = room;
-	mark_room(room, 0);
+	room->file = 1;
 	while (room)
 	{
 		i = 0;
@@ -65,7 +61,7 @@ t_room		*to_thread(t_room *room)
 			if (room->pipe[i]->file == 0)
 			{
 				tmp->thread = room->pipe[i];
-				mark_room(room->pipe[i], room->file);
+				room->pipe[i]->file = room->file + 1;
 				tmp = tmp->thread;
 			}
 			i++;
@@ -83,7 +79,7 @@ void		algo(t_lem *l)
 	tmp = l->room_list;
 	while (tmp && !(tmp->spe & END))
 		tmp = tmp->next;
-	if (!tmp)
+	if (tmp == NULL)
 		ft_error("ERROR (end)");
 	l->room_list = soluce(to_thread(tmp), &*l->room_list);
 }
