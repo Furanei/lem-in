@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 16:49:08 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/02/24 20:11:31 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/03/01 20:09:25 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,7 @@ void	parse_pipe(t_lem *l, char *s)
 	r1 = l->room_list;
 	r2 = l->room_list;
 	if (!(r1->npipe < l->nb_room) || !(r1->npipe < l->nb_room))
-	{
-
 		ft_error("ERROR (too much pipe)");
-	}
 	r1 = get_room(&s[j], &*r1);
 	j = next_word(s, i, '-');
 	r2 = get_room(&s[j], &*r2);
@@ -83,20 +80,3 @@ void	parse_pipe(t_lem *l, char *s)
 	r2->pipe[r2->npipe] = r1;
 	r2->npipe++;
 }
-
-// int		check_pipe(t_lem *l)
-// {
-// 	while (l->lmap[l->i] != 0)
-// 	{
-// 		if (parse_comment(&*l) == 0)
-// 			break ;
-// 		if (ft_count_word(l->lmap[l->i], '-') != 2
-// 			|| ft_strchr(l->lmap[l->i], ' '))
-// 		{
-// 			ft_error("ERROR");
-// 		}
-// 		parse_pipe(&*l);
-// 		l->i++;
-// 	}
-// 	return (1);
-// }

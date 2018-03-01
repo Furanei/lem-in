@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/10 17:43:13 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/02/24 22:10:07 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/03/01 20:03:28 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,9 @@ void	get_data(t_lem *l)
 		exit(1);
 	while (get_next_line(0, &s) > 0)
 	{
-		ft_printf("%ld) {bold}%s{eoc} ", i, s);
 		if (parse_data && *s == 0)// empty line = Break SAVED
 		{
-			ft_printf("{blue}END of SAVED{eoc}");
+			// ft_printf("{blue}END of SAVED{eoc}");
 			parse_data = 0;
 			// saved_map continue && no data
 		}
@@ -41,19 +40,19 @@ void	get_data(t_lem *l)
 				 if (!(l->f & 0xFFFFFFFF) && isvalid_ant_number(s) == 1)
 				{
 					check_ant(&*l, s);
-					ft_printf("{green}Ant OK ✓{eoc}");
+					// ft_printf("{green}Ant OK ✓{eoc}");
 				}
 				else if (((l->f & 0x6) != 0x6) && isvalid_command(s) && (!(l->f & 24)))
 				{
 					parse_order(&*l, s);
-					ft_printf("{green}Order OK ✓{eoc}");
+					// ft_printf("{green}Order OK ✓{eoc}");
 				}
 				else if (isvalid_comment(s))
-					ft_printf("{green}Comment OK ✓{eoc}");
+					;// ft_printf("{green}Comment OK ✓{eoc}");
 				else if ((pipe == 0) && (name_size = isvalid_room(s)))
 				{//recup le return de isvalid room qui est egal a len du room name
 					parse_room(&*l, s, name_size);/////////////
-					ft_printf("{green}Room OK ✓{eoc}");
+					// ft_printf("{green}Room OK ✓{eoc}");
 				}
 				else if (isvalid_pipe(s) && (!(l->f & 24)))
 				{
@@ -62,11 +61,11 @@ void	get_data(t_lem *l)
 					pipe = 1;
 					// // if is =valid pipe, cant valid room
 					parse_pipe(&*l, s);///////////////////////
-					ft_printf("{green}Pipe OK ✓{eoc}");
+					// ft_printf("{green}Pipe OK ✓{eoc}");
 				}
 				else
 				{
-					ft_printf("{red}KO{eoc}", s);
+					// ft_printf("{red}KO{eoc}", s);
 					ft_error("ERROR");
 				}
 		}
@@ -78,18 +77,10 @@ void	get_data(t_lem *l)
 		}
 		if (!(l->map = ft_strnjoinfree(l->map, s, len, 'B')))
 			exit(1);
-		ft_printf("\n");
+		// ft_printf("\n");
 	}
 	l->lmap = ft_strsplit(l->map, '\n');
 }
-
-// void	check_error(t_lem *l)
-// {
-// 	check_ant(&*l);
-// 	check_room(&*l);
-// 	malloc_ptr_pipe(&*l);
-// 	check_pipe(&*l);
-// }
 
 int		main(void)
 {
@@ -97,11 +88,9 @@ int		main(void)
 
 	ft_bzero(&l, sizeof(t_lem));
 	l.room_list = NULL;
-	get_data(&l);
-	// check_error(&l);
+	get_data(&l);	// check_error(&l);
 	algo(&l);
-	// ft_printf("%s\n\n", l.map);
+	ft_printf("%s\n\n", l.map);
 	print_ant(&l);
-	ft_test_room_pipe(l.room_list);///////
 	return (0);
 }

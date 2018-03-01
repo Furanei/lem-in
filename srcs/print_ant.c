@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/01 05:11:55 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/02/24 22:18:17 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/03/01 20:10:10 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,12 @@ void	move_to_next_room(t_room *src, t_room *dst)
 	{
 		dst->ant = src->ant;
 		src->ant = 0;
-		// ft_printf("L%d-%s ", src->ant, src->name);
+		ft_printf("L%d-%s ", dst->ant, dst->name);
 	}
 }
 
 void	moving(t_room *room)
 {
-	ft_printf("(%s)->", room->name);
 	if (room->thread == NULL)
 	{
 		room->ant = 0;
@@ -57,14 +56,10 @@ void	print_ant(t_lem *l)
 
 	i = 1;
 	len = path_len(l->room_list);
-	ft_printf("len is %d !\n", len);
-	while (i - len <= (l->ant - 2))// nb_room <= nb_ant -2
+	while (i - len <= (l->ant - 2))
 	{
 		if (i <= l->ant)
-		{
 			l->room_list->ant = i;
-			// ft_printf("\nL%d dans %s\n", i, l->room_list->name);
-		}
 		moving(l->room_list);
 		i++;
 		ft_printf("\n");

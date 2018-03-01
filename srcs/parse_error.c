@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/21 17:58:44 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/02/24 22:09:49 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/03/01 20:08:35 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,27 +50,3 @@ void				check_ant(t_lem *l, char *s)
 		ft_error("ERROR (no_ant)");
 	l->f += ANT;
 }
-
-// int					check_room(t_lem *l)
-// {
-// 	int i;
-
-// 	i = 0;
-// 	l->i++;
-// 	while (l->lmap[l->i] != NULL)
-// 	{
-// 		parse_comment(&*l);
-// 		if (ft_strchr(l->lmap[l->i], '-'))
-// 			break ;
-// 		if (l->lmap[l->i][0] == 'L')
-// 			ft_error("ERROR (room)");
-// 		else if (search_sharp(l) == 2)
-// 			parse_order(&*l);
-// 		else if (!room_count_word(l->lmap[l->i], ' '))
-// 			ft_error("ERROR (room)");
-// 		else
-// 			parse_room(&*l, 0);
-// 		l->i++;
-// 	}
-// 	return (1);
-// }

@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/13 18:20:57 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/02/24 20:11:06 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/03/01 20:11:03 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,20 +60,6 @@ int		next_word(char *s, int i, char c)
 	return (i + 1);
 }
 
-// void	room_start_end(t_lem *l, int *option)
-// {
-// 	if (l->f & NEXTSTART)
-// 	{
-// 		*option = START;
-// 		l->f -= NEXTSTART;
-// 	}
-// 	else if (l->f & NEXTEND)
-// 	{
-// 		*option = END;
-// 		l->f -= NEXTEND;
-// 	}
-// }
-
 void	add_room(t_lem *l, char *s, t_room *tmp, int size)
 {
 	if (tmp != NULL)
@@ -99,40 +85,12 @@ void	add_room(t_lem *l, char *s, t_room *tmp, int size)
 	}
 }
 
-int					parse_room(t_lem *l, char *s, int len)
+int		parse_room(t_lem *l, char *s, int len)
 {
 	t_room		*tmp;
 
 	tmp = NULL;
 	tmp = l->room_list;
-	// size = ft_strlen_c(s, ' ');
-	// room_start_end(&*l, &option);
 	add_room(&*l, s, &*tmp, len);
-	// size = next_word(s, size, ' ');
-	// // if (!ft_isnumber(&s[size], ft_strlen_c(&s[size], ' ')))
-	// // 	ft_error_info(INFO, "room");
-	// size = next_word(s, size, ' ');
-	// if (!ft_isnumber(&s[size], ft_strlen_c(&s[size], ' ')))
-	// 	ft_error("ERROR (coor)");
 	return (1);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
