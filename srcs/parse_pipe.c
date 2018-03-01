@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 16:49:08 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/03/01 20:09:25 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/03/01 23:32:05 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,9 @@ int		strequ_room(char const *s1, char const *s2)
 t_room	*get_room(char *s, t_room *r)
 {
 	while (r && (strequ_room(s, r->name) == 0))
-	{
 		r = r->next;
-	}
 	if (r == NULL)
-	{
-		ft_error("ERRORget");
-	}
+		ft_error("ERROR");
 	return (r);
 }
 
