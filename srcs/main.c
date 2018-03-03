@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/02 18:24:15 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/03/03 18:55:34 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/03/04 00:51:38 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,17 @@ char	*save_line(char *map, char *s, int *f)
 		if (!(map = ft_strnjoinfree(map, "\n", 1, 'L')))
 			exit(1);
 	}
-	if (!(map = ft_strnjoinfree(map, s, ft_strlen(s), 'B')))
-		exit(1);
+	if (map)
+	{
+		if (!(map = ft_strnjoinfree(map, s, ft_strlen(s), 'B')))
+			exit(1);
+	}
+	else
+	{
+		if (!(map = ft_strdup(s)))
+			exit(1);
+		free(s);
+	}
 	*f += ((*f & FIRST_LINE) ? 0 : FIRST_LINE);
 	return (map);
 }
@@ -56,8 +65,6 @@ void	get_data(t_lem *l)
 {
 	char	*s;
 
-	if (!(l->map = ft_strndup("\0", 1)))
-		exit(1);
 	while (get_next_line(0, &s) > 0)
 	{
 		if (((l->f & DATA) == 0) && (*s == 0))
@@ -68,7 +75,6 @@ void	get_data(t_lem *l)
 	}
 	if ((l->f & 423) != 423)
 		ft_error("ERROR");
-	l->lmap = ft_strsplit(l->map, '\n');
 }
 
 int		main(void)
