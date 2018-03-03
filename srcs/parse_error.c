@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/21 17:58:44 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/03/01 20:35:30 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/03/03 18:28:30 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,20 @@ unsigned long long	atoi_lem(char const *str)
 
 void				check_ant(t_lem *l, char *s)
 {
-	if (l->f & 0xFFFFFFFE || !(ft_isnumber(s,
+	if (l->f & 0x13F || !(ft_isnumber(s,
 	ft_strlen(s))))
-		ft_error("ERROR (ant_error)");
+		ft_error("ERROR");
 	if ((l->ant = atoi_lem(s)) <= 0)
-		ft_error("ERROR (no_ant)");
+		ft_error("ERROR");
 	l->f += ANT;
+}
+
+int					isvalid_ant_number(char *s)
+{
+	int	nb;
+
+	if ((ft_isnumber(s, ft_strlen(s))))
+		if ((nb = atoi_lem(s)) > 0)
+			return (1);
+	return (0);
 }

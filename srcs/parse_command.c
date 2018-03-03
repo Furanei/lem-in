@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/13 16:38:12 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/03/01 20:12:18 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/03/03 19:03:17 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,6 @@ int		parse_comment(t_lem *l)
 	if (l->lmap[l->i] == NULL)
 		return (0);
 	return (1);
-}
-
-int		search_sharp(t_lem *l)
-{
-	int	n;
-
-	n = 0;
-	if (l->lmap[l->i][0] == '#')
-		n++;
-	if (l->lmap[l->i][1] == '#')
-		n++;
-	return (n);
 }
 
 void	parse_order(t_lem *l, char *s)

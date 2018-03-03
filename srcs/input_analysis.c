@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/17 16:45:56 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/03/02 00:26:27 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/03/03 18:54:22 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int		isvalid_comment(char *s)
 {
 	if (s != 0 && s[0] == '#')
-		return(1);
+		return (1);
 	return (0);
 }
 
@@ -31,15 +31,6 @@ int		isvalid_command(char *s)
 				return (2);
 		}
 	}
-	return (0);
-}
-
-int		isvalid_ant_number(char *s)
-{
-	int nb;
-	if ((ft_isnumber(s, ft_strlen(s))))
-		if ((nb = atoi_lem(s)) > 0)
-			return (1);
 	return (0);
 }
 
@@ -68,7 +59,7 @@ int		isvalid_room(char *s)
 				if (ft_isnumber(&s[i], (len - i + 1)) && i > 1)
 				{
 					i -= 2;
-					if (s[i] != ' ')
+					if (s[i] != ' ' && ft_strnchr(s, ' ', (i)) == 0)
 						return (i + 1);
 				}
 			}
@@ -79,7 +70,7 @@ int		isvalid_room(char *s)
 
 int		isvalid_pipe(char *s)
 {
-	if (ft_count_word(s, '-') == 2)// et room trouve dans la liste
+	if (ft_count_word(s, '-') == 2)
 		return (1);
 	return (0);
 }

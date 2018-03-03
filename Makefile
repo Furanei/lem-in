@@ -6,7 +6,7 @@
 #    By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/09/30 18:29:49 by mbriffau          #+#    #+#              #
-#    Updated: 2018/02/06 07:08:11 by mbriffau         ###   ########.fr        #
+#    Updated: 2018/03/03 18:24:46 by mbriffau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,11 +26,13 @@ LIBFT_PATH = lib/
 # Sources
 SRCS_NAME = \
 		main.c \
+		input_analysis.c \
 		parse_command.c \
 		parse_room.c \
 		parse_pipe.c \
 		parse_error.c \
 		solve.c \
+		mark_the_map.c \
 		print_ant.c
 
 # Paths foreach

@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/13 18:20:57 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/03/01 20:11:03 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/03/03 19:06:15 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,33 +31,6 @@ t_room	*ft_lstroomnew(void const *name, size_t size, int *f)
 		*f -= NEXTEND;
 	}
 	return (newroom);
-}
-
-/*
-**si le premier ou dernier char est = c, ou si le nombre de
-** mots est different de 3, return 0.
-*/
-
-int		room_count_word(const char *s, char c)
-{
-	int		i;
-
-	i = 0;
-	if (s[0] == c || s[ft_strlen(s) - 1] == c)
-		return (0);
-	if (ft_count_word(s, c) != 3)
-		return (0);
-	return (1);
-}
-
-int		next_word(char *s, int i, char c)
-{
-	while (s[i] != '\0' && s[i] != c)
-		i = i + 1;
-	if ((s[i] == '\0') || ((s[i + 1] == '\0'
-		|| s[i + 1] == c)))
-		ft_error("ERROR (room)");
-	return (i + 1);
 }
 
 void	add_room(t_lem *l, char *s, t_room *tmp, int size)

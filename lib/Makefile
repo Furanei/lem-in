@@ -6,7 +6,7 @@
 #    By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/08/10 16:46:50 by achambon          #+#    #+#              #
-#    Updated: 2018/02/05 03:10:22 by mbriffau         ###   ########.fr        #
+#    Updated: 2018/02/23 23:29:57 by mbriffau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,24 +60,24 @@ SOURCES =	ft_printf.c \
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	@make -C $(LIBFT)
-	@cp libft/libft.a ./$(NAME)
-	@ar rc $(NAME) $(OBJS)
-	@ranlib $(NAME)
+	make -C $(LIBFT)
+	cp libft/libft.a ./$(NAME)
+	ar rc $(NAME) $(OBJS)
+	ranlib $(NAME)
 	@echo "libftprintf.a \033[0;32mcreated.\033[0m"
 
 $(DIR_O)/%.o: $(DIR_S)/%.c
-	@mkdir -p obj
-	@$(CC) $(FLAGS) -I $(HEADER) -o $@ -c $<
+	mkdir -p obj
+	$(CC) $(FLAGS) -I $(HEADER) -o $@ -c $<
 
 clean:
-	@make clean -C $(LIBFT)
-	@-/bin/rm -f $(OBJS)
-	@-/bin/rm -rf $(DIR_O)
+	make clean -C $(LIBFT)
+	-/bin/rm -f $(OBJS)
+	-/bin/rm -rf $(DIR_O)
 
 fclean:
-	@make fclean -C $(LIBFT)
-	@-/bin/rm -f $(NAME)
+	make fclean -C $(LIBFT)
+	-/bin/rm -f $(NAME)
 	@echo "$(NAME) has been \033[1;31mdeleted\033[0m."
 
 re : fclean all

@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 16:49:08 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/03/01 23:32:05 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/03/03 19:23:57 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,20 @@ int		strequ_room(char const *s1, char const *s2)
 	return (0);
 }
 
-t_room	*get_room(char *s, t_room *r)
+void	duplicate_pipe(char *s, t_room *r)
+{
+	int		i;
+
+	i = 0;
+	while (i < r->npipe)
+	{
+		if (strequ_room(s, r->pipe[i]->name) == 1)
+			ft_error("ERROR (duplicate pipe)");
+		i++;
+	}
+}
+
+t_room	*valid_room(char *s, t_room *r)
 {
 	while (r && (strequ_room(s, r->name) == 0))
 		r = r->next;
@@ -57,20 +70,17 @@ t_room	*get_room(char *s, t_room *r)
 
 void	parse_pipe(t_lem *l, char *s)
 {
-	int		j;
-	int		i;
 	t_room	*r1;
 	t_room	*r2;
 
-	j = 0;
-	i = ft_strlen_c(s, '-');
 	r1 = l->room_list;
 	r2 = l->room_list;
-	if (!(r1->npipe < l->nb_room) || !(r1->npipe < l->nb_room))
-		ft_error("ERROR (too much pipe)");
-	r1 = get_room(&s[j], &*r1);
-	j = next_word(s, i, '-');
-	r2 = get_room(&s[j], &*r2);
+	if (!(r1->npipe < l->nb_room))
+		ft_error("ERROR");
+	r1 = valid_room(s, &*r1);
+	r2 = valid_room(&s[ft_strlen_c(s, '-') + 1], &*r2);
+	duplicate_pipe(s, r2);
+	duplicate_pipe(&s[ft_strlen_c(s, '-') + 1], r1);
 	r1->pipe[r1->npipe] = r2;
 	r1->npipe++;
 	r2->pipe[r2->npipe] = r1;

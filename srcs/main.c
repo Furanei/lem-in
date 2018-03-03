@@ -5,14 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/10 17:43:13 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/03/02 00:24:34 by mbriffau         ###   ########.fr       */
+/*   Created: 2018/03/02 18:24:15 by mbriffau          #+#    #+#             */
+/*   Updated: 2018/03/03 18:55:34 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
-
-void	ft_test_room_pipe(t_room *rlst);/////////////////////////
 
 char	*save_line(char *map, char *s, int *f)
 {
@@ -23,7 +21,7 @@ char	*save_line(char *map, char *s, int *f)
 	}
 	if (!(map = ft_strnjoinfree(map, s, ft_strlen(s), 'B')))
 		exit(1);
-	*f += ((*f & FIRST_LINE) ? 0 : FIRST_LINE); 
+	*f += ((*f & FIRST_LINE) ? 0 : FIRST_LINE);
 	return (map);
 }
 
@@ -32,18 +30,20 @@ t_lem	*parse_data(t_lem *l, char *s)
 	int name_size;
 
 	name_size = 0;
-	if (!(l->f & 0xFFFFFFFF) && isvalid_ant_number(s) == 1)
+	if (!(l->f & 0x13F) && isvalid_ant_number(s) == 1)
 		check_ant(&*l, s);
 	else if (((l->f & 0x6) != 0x6) && isvalid_command(s) && (!(l->f & 24)))
 		parse_order(&*l, s);
 	else if (isvalid_comment(s))
 		;
 	else if (((l->f & PIPE) == 0) && (name_size = isvalid_room(s)))
-		parse_room(&*l, s, name_size);
-	else if (isvalid_pipe(s) && (!(l->f & 24)))
 	{
-		if ((l->f & PIPE) == 0)
-			malloc_ptr_pipe(&*l);
+		parse_room(&*l, s, name_size);
+		(l->f & ROOM) == 0 ? l->f += ROOM : 0;
+	}
+	else if ((l->f & 0x106) && isvalid_pipe(s) && (!(l->f & 24)))
+	{
+		((l->f & PIPE) == 0) ? malloc_ptr_pipe(&*l) : 0;
 		(l->f & PIPE) == 0 ? l->f += PIPE : 0;
 		parse_pipe(&*l, s);
 	}
@@ -66,6 +66,8 @@ void	get_data(t_lem *l)
 			l = parse_data(l, s);
 		l->map = save_line(l->map, s, &l->f);
 	}
+	if ((l->f & 423) != 423)
+		ft_error("ERROR");
 	l->lmap = ft_strsplit(l->map, '\n');
 }
 
