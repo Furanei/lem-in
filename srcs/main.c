@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/02 18:24:15 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/03/04 00:51:38 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/03/05 20:46:01 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void	get_data(t_lem *l)
 			l = parse_data(l, s);
 		l->map = save_line(l->map, s, &l->f);
 	}
+	ft_strdel(&s);
 	if ((l->f & 423) != 423)
 		ft_error("ERROR");
 }
@@ -80,12 +81,16 @@ void	get_data(t_lem *l)
 int		main(void)
 {
 	t_lem	l;
+	char	buff[2];
 
+	if (read(0, buff, 0) < 0)
+		ft_error("ERROR");
 	ft_bzero(&l, sizeof(t_lem));
 	l.room_list = NULL;
 	get_data(&l);
 	algo(&l);
 	ft_printf("%s\n\n", l.map);
 	print_ant(&l);
+	free(l.map);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/10 17:47:45 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/03/03 19:13:33 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/03/05 17:11:41 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ typedef struct		s_room
 	char			*name;
 	int				file;
 	int				ant;
-
 	int				spe;
 	int				npipe;
 	struct s_room	*next;
@@ -39,15 +38,10 @@ typedef struct		s_room
 
 typedef struct		s_lem
 {
-	char			*s;
 	char			*map;
-	char			**lmap;
 	int				ant;
 	int				nb_room;
 	int				f;
-	int				i;
-	int				index;
-	int				size;
 	t_room			*room_list;
 }					t_lem;
 

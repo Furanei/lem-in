@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 00:30:50 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/03/03 19:09:17 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/03/06 00:06:34 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,17 @@ t_room		*soluce(t_room *r1, t_room *rlst)
 	int		path_len;
 	t_room	*tmp;
 
-	tmp = rlst;
 	rlst = r1;
+	tmp = rlst;
 	path_len = r1->file;
 	while (--path_len > 0)
 	{
 		r1 = find_path(r1, path_len);
-		tmp->thread = r1;
-		tmp = tmp->thread;
+		rlst->thread = r1;
+		rlst = rlst->thread;
 	}
-	tmp->thread = NULL;
+	rlst->thread = NULL;
+	rlst = tmp;
 	return (rlst);
 }
 
@@ -55,7 +56,9 @@ void		algo(t_lem *l)
 
 	tmp = l->room_list;
 	while (tmp && !(tmp->spe & END))
+	{
 		tmp = tmp->next;
+	}
 	(tmp == NULL) ? ft_error("ERROR (end)") : 0;
 	l->room_list = soluce(mark_the_map(tmp), &*l->room_list);
 }

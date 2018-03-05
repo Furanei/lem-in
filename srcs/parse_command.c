@@ -6,25 +6,11 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/13 16:38:12 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/03/03 19:03:17 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/03/04 21:12:58 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
-
-int		parse_comment(t_lem *l)
-{
-	if (l->lmap[l->i] == 0)
-		ft_error("ERROR");
-	while (l->lmap[l->i] && (l->lmap[l->i][0] == '#' &&
-		(l->lmap[l->i][1] != '#' || l->lmap[l->i][2] == '#')))
-	{
-		l->i++;
-	}
-	if (l->lmap[l->i] == NULL)
-		return (0);
-	return (1);
-}
 
 void	parse_order(t_lem *l, char *s)
 {

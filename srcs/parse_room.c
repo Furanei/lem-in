@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/13 18:20:57 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/03/04 00:34:15 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/03/05 20:46:23 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_room	*ft_lstroomnew(void const *name, size_t size, int *f)
 void	add_room(t_lem *l, char *s, t_room *tmp, int size)
 {
 	char	*a;
-	
+
 	if (tmp != NULL)
 	{
 		while (tmp != NULL)

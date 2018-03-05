@@ -15,3 +15,9 @@ duplicate pipe
 
 
 leaks
+
+brew update
+brew install valgrind
+alias valgrind="~/.brew/bin/valgrind"
+
+valgrind --tool=memcheck --leak-check=full ./lem-in < test
