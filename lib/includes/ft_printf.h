@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/28 22:10:28 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/02/03 11:29:39 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/03/06 16:03:18 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define FT_PRINTF_H
 # include "../libft/includes/libft.h"
 # include <stdarg.h>
-# include <errno.h>
 # include <unistd.h>
 # include <wchar.h>
 # include <sys/types.h>

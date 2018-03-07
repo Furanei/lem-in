@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/02 18:24:15 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/03/05 20:46:01 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/03/06 15:25:42 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ t_lem	*parse_data(t_lem *l, char *s)
 		parse_pipe(&*l, s);
 	}
 	else
-		ft_error("ERROR");
+		(l->f & PIPE) == 0 ? ft_error("ERROR") : (l->f += DATA);
 	return (l);
 }
 

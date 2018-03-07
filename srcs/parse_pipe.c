@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/24 16:49:08 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/03/03 23:15:38 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/03/06 15:50:09 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ t_room	*valid_room(char *s, t_room *r)
 	while (r && (strequ_room(s, r->name) == 0))
 		r = r->next;
 	if (r == NULL)
-		ft_error("ERROR");
+		return (NULL);
 	return (r);
 }
 
@@ -79,6 +79,11 @@ void	parse_pipe(t_lem *l, char *s)
 		ft_error("ERROR");
 	r1 = valid_room(s, &*r1);
 	r2 = valid_room(&s[ft_strlen_c(s, '-') + 1], &*r2);
+	if (r1 == NULL || r2 == NULL)
+	{
+		l->f += DATA;
+		return ;
+	}
 	duplicate_pipe(s, r2);
 	duplicate_pipe(&s[ft_strlen_c(s, '-') + 1], r1);
 	r1->pipe[r1->npipe] = r2;

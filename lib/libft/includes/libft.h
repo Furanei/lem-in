@@ -6,7 +6,7 @@
 /*   By: mbriffau <mbriffau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/12 21:10:16 by mbriffau          #+#    #+#             */
-/*   Updated: 2018/02/05 02:22:08 by mbriffau         ###   ########.fr       */
+/*   Updated: 2018/03/06 16:21:26 by mbriffau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include <string.h>
 # include <stdlib.h>
-# include <ctype.h>
 # include <unistd.h>
 # include "get_next_line.h"
 
